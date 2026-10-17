@@ -29,6 +29,11 @@
             android:exported="false"
             android:theme="@style/Theme.Dimore" />
 
+        <activity
+            android:name=".LicensesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Dimore" />
+
         <provider
             android:name="rikka.shizuku.ShizukuProvider"
             android:authorities="${applicationId}.shizuku"

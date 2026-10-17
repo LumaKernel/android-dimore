@@ -53,6 +53,9 @@ class SettingsActivity : ComponentActivity() {
                         onOpenUrl = { url ->
                             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                         },
+                        onOpenLicenses = {
+                            startActivity(Intent(this, LicensesActivity::class.java))
+                        },
                     )
                 }
             }
@@ -93,6 +96,7 @@ private fun SettingsScreen(
     offNotificationMode: String,
     onOffNotificationModeChange: (String) -> Unit,
     onOpenUrl: (String) -> Unit,
+    onOpenLicenses: () -> Unit,
 ) {
     Column(
         modifier =
@@ -178,6 +182,17 @@ private fun SettingsScreen(
                         .padding(vertical = 4.dp),
             )
         }
+
+        Text(
+            text = "オープンソースライセンス",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary,
+            textDecoration = TextDecoration.Underline,
+            modifier =
+                Modifier
+                    .clickable { onOpenLicenses() }
+                    .padding(top = 8.dp, bottom = 4.dp),
+        )
     }
 }
 

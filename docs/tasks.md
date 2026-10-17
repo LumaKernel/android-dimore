@@ -120,6 +120,7 @@
 - [x] [ロジック] BuildConfig にリポジトリ URL 埋め込み: build.gradle.kts で GITHUB_REPOSITORY 環境変数から buildConfigField 追加、デフォルト値あり
 - [x] [ロジック] CI/CD workflow 更新: GITHUB_REPOSITORY は GitHub Actions 組み込み変数のため変更不要
 - [x] [UI] About 画面 / セクション: ビルド情報、ライセンス、リポジトリ URL を設定画面下部に表示 (利用ライブラリライセンス一覧は別途)
+- [x] [ロジック] 利用ライブラリライセンス一覧: AboutLibraries プラグインで依存ライブラリのライセンス情報を収集し、設定画面の About セクションから表示
 - [ ] [QA] アプリ情報表示確認
 
 ## 判断が必要な事項

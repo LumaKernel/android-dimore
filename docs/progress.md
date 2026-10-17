@@ -60,3 +60,4 @@
 - メイン画面にバージョン表示: BuildConfig 有効化、アプリ名直下に VERSION_NAME 表示
 - BuildConfig に REPOSITORY_URL 埋め込み: GITHUB_REPOSITORY 環境変数 or git remote から生成 (不正ならビルドエラー)
 - About セクション: 設定画面下部にバージョン、ライセンス、リポジトリ URL (クリッカブル) を表示
+- 利用ライブラリライセンス一覧: AboutLibraries 導入、LicensesActivity で OSS ライセンス一覧表示、設定画面からリンク

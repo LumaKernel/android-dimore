@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.jlleitschuh.gradle.ktlint")
+    id("com.mikepenz.aboutlibraries.plugin")
 }
 
 val appVersion = file("${rootProject.projectDir}/version.txt").readText().trim().toInt()
@@ -81,4 +82,8 @@ dependencies {
     // Shizuku API (optional - for overlay permission auto-grant)
     implementation("dev.rikka.shizuku:api:13.1.5")
     implementation("dev.rikka.shizuku:provider:13.1.5")
+
+    // AboutLibraries - OSS license display
+    implementation("com.mikepenz:aboutlibraries-core:11.2.3")
+    implementation("com.mikepenz:aboutlibraries-compose-m3:11.2.3")
 }
