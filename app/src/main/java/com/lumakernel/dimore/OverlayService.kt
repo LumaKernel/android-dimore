@@ -40,6 +40,7 @@ class OverlayService : Service() {
     private val dismissNotificationRunnable = Runnable {
         val manager = getSystemService(NotificationManager::class.java)
         manager.cancel(INACTIVE_NOTIFICATION_ID)
+        stopSelf()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -60,9 +61,8 @@ class OverlayService : Service() {
             }
             ACTION_STOP -> {
                 removeOverlay()
-                showInactiveNotification()
                 stopForeground(STOP_FOREGROUND_REMOVE)
-                stopSelf()
+                showInactiveNotification()
             }
             ACTION_SET_BRIGHTNESS -> {
                 val brightness = intent.getFloatExtra(EXTRA_BRIGHTNESS, currentBrightness)
@@ -109,9 +109,9 @@ class OverlayService : Service() {
         params.gravity = Gravity.TOP or Gravity.START
 
         val view = View(this)
-        view.setBackgroundColor(Color.BLACK)
-        view.alpha = brightness.coerceIn(0.0f, MAX_BRIGHTNESS)
-        currentBrightness = view.alpha
+        val clamped = brightness.coerceIn(0.0f, MAX_BRIGHTNESS)
+        currentBrightness = clamped
+        view.setBackgroundColor(brightnessToColor(clamped))
 
         windowManager.addView(view, params)
         overlayView = view
@@ -127,8 +127,13 @@ class OverlayService : Service() {
     private fun setBrightness(brightness: Float) {
         val view = overlayView ?: return
         val clamped = brightness.coerceIn(0.0f, MAX_BRIGHTNESS)
-        view.alpha = clamped
+        view.setBackgroundColor(brightnessToColor(clamped))
         currentBrightness = clamped
+    }
+
+    private fun brightnessToColor(brightness: Float): Int {
+        val alpha = (brightness * 255).toInt().coerceIn(0, 255)
+        return Color.argb(alpha, 0, 0, 0)
     }
 
     private fun updateNotification() {
@@ -145,9 +150,11 @@ class OverlayService : Service() {
         when (offNotificationMode) {
             "always" -> {
                 manager.notify(INACTIVE_NOTIFICATION_ID, buildInactiveNotification())
+                stopSelf()
             }
             "dismiss_0s" -> {
                 // 即時非表示: 通知を出さない
+                stopSelf()
             }
             "dismiss_10s" -> {
                 manager.notify(INACTIVE_NOTIFICATION_ID, buildInactiveNotification())
@@ -200,7 +207,7 @@ class OverlayService : Service() {
         return Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("dimore")
             .setContentText("明度: ${brightnessPercent}%")
-            .setSmallIcon(android.R.drawable.ic_menu_view)
+            .setSmallIcon(R.drawable.ic_notification)
             .setOngoing(true)
             .setContentIntent(contentIntent)
             .addAction(Notification.Action.Builder(null, "OFF", stopIntent).build())

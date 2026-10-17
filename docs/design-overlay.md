@@ -20,7 +20,8 @@
   - format: `PixelFormat.TRANSLUCENT`
   - width/height: `MATCH_PARENT`
   - gravity: `Gravity.TOP or Gravity.START`
-- View は単純な `android.view.View` で、背景色を `Color.BLACK` にし、alpha で明度を制御
+- View は単純な `android.view.View` で、背景色を `Color.argb(alpha, 0, 0, 0)` で明度を制御
+  - `View.alpha` ではなく背景色の alpha チャンネルを使用する。`FLAG_NOT_TOUCHABLE` なウィンドウは `LayoutParams.alpha > 0.8` 時にシステムが強制的に 0.8 に制限するため
 
 ## 明度制御
 
