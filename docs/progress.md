@@ -2,8 +2,9 @@
 
 ## 現在のステータス
 
-- フェーズ: フェーズ 8 (権限管理)
-- 残タスク: 権限管理 QA (実機確認待ち)、未コミット変更のコミット
+- フェーズ: フェーズ 9 (CI/CD)
+- 残タスク: CI workflow, ktlint 導入, リリース署名, CD workflow, CLAUDE.md 更新, CI/CD QA
+- フェーズ 8 残: 権限管理 QA (実機確認待ち)
 - ビルド: 成功確認済み
 
 ## 完了済み
@@ -39,3 +40,4 @@
 - POST_NOTIFICATIONS ランタイム権限要求: onCreate で要求、onResume で状態更新
 - Shizuku 連携: ShizukuHelper (IShizukuService.newProcess で appops set 実行)、MainActivity に「Shizuku で権限を付与」ボタン (Shizuku 利用可能時のみ表示)
 - ANR修正: grantOverlayPermissionViaShizuku をバックグラウンドスレッドで実行するよう変更
+- CI/CD 設計: docs/design-ci-cd.md 作成 (ktlint, GitHub Actions CI/CD, APK署名, 自動リリース)

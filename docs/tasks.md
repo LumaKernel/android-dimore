@@ -68,6 +68,18 @@
 - [x] [ロジック] Shizuku 連携 (オプショナル): Shizuku API 依存追加、Shizuku 利用可能時にオーバーレイ権限自動付与を提案するUI
 - [ ] [QA] 権限管理の動作確認: 通知権限要求ダイアログ表示、Shizuku 連携 (実機確認待ち。コードレビュー済み: ANR修正 grantOverlayPermissionViaShizuku をバックグラウンドスレッド化)
 
+## フェーズ 9: CI/CD
+
+依存: なし
+
+- [x] [設計] CI/CD 設計: docs/design-ci-cd.md に記載。GitHub Actions、ktlint、署名、自動リリース
+- [ ] [ロジック] CI workflow: .github/workflows/ci.yml — push/PR で lint (ktlint), compile check (assembleDebug)
+- [ ] [ロジック] ktlint 導入: build.gradle.kts に ktlint プラグイン追加、既存コードのフォーマット修正
+- [ ] [ロジック] リリース署名設定: app/build.gradle.kts に signingConfigs 追加 (環境変数/GitHub Secrets から keystore 読み込み)
+- [ ] [ロジック] CD workflow: .github/workflows/release.yml — tag push (v*) で assembleRelease + GitHub Release に署名済み APK アップロード
+- [ ] [メタ] CLAUDE.md 更新: CI/CD 関連の規約 (ktlint フォーマット必須、tag push でリリース)
+- [ ] [QA] CI/CD 動作確認: CI が PR で動作、tag push でリリース APK が生成されること
+
 ## 判断が必要な事項
 
 - ~~minSdk をどこに設定するか~~ → API 36 のみ (Android 16 専用) に決定
