@@ -78,4 +78,4 @@ APK は `app/build/outputs/apk/debug/app-debug.apk` に出力されます。
 
 ## ライセンス
 
-MIT
+[UNLICENSE](UNLICENSE) (パブリックドメイン)
