@@ -17,6 +17,9 @@ android {
         targetSdk = 36
         versionCode = appVersion
         versionName = "v$appVersion.0.0"
+
+        val repo = System.getenv("GITHUB_REPOSITORY") ?: "LumaKernel/android-dimore"
+        buildConfigField("String", "REPOSITORY_URL", "\"https://github.com/$repo\"")
     }
 
     signingConfigs {
