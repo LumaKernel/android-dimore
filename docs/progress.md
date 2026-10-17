@@ -2,8 +2,10 @@
 
 ## 現在のステータス
 
-- フェーズ: 全実装完了、QA 待ち
-- 残タスク (QA のみ):
+- フェーズ: Phase 16 実装完了、Phase 17 実装待ち
+- 残タスク:
+  - Phase 16: UI トップにアイコン表示 — 実装完了、QA 待ち
+  - Phase 17: ON/OFF ラベル改善 — 実装待ち
   - Phase 8: 権限管理 QA (実機確認待ち)
   - Phase 9: CI/CD QA (push 後に確認)
   - Phase 11: 権限 UI QA (実機確認待ち)
@@ -65,3 +67,5 @@
 - BuildConfig に REPOSITORY_URL 埋め込み: GITHUB_REPOSITORY 環境変数 or git remote から生成 (不正ならビルドエラー)
 - About セクション: 設定画面下部にバージョン、ライセンス、リポジトリ URL (クリッカブル) を表示
 - 利用ライブラリライセンス一覧: AboutLibraries 導入、LicensesActivity で OSS ライセンス一覧表示、設定画面からリンク
+- spec.md 更新: メイン画面上部にアプリアイコン追加、トグルボタンラベルをアクション明示型に変更
+- メイン画面にアプリアイコン表示: Image + painterResource(R.mipmap.ic_launcher) で 72dp 表示
