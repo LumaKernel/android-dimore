@@ -14,10 +14,39 @@ APKは `app/build/outputs/apk/debug/app-debug.apk` に出力される。
 
 ## インストール
 
-`adb install` を使うこと。APKファイルを端末上で直接タップしてインストールすると、Android 15+ の Enhanced Confirmation Mode により SYSTEM_ALERT_WINDOW 権限が制限され、オーバーレイが使用できない。
+APKファイルを端末上で直接タップしてインストールすると、Android 15+ の Enhanced Confirmation Mode により SYSTEM_ALERT_WINDOW 権限が制限され、オーバーレイ権限の設定画面で「App was denied access」と表示されて許可できない。
+
+信頼されたインストーラー (shell uid) 経由でインストールする必要がある。
+
+### 方法1: adb install (PC必要)
 
 ```
 adb install app/build/outputs/apk/debug/app-debug.apk
+```
+
+### 方法2: Shizuku + rish (PC不要)
+
+[Shizuku](https://shizuku.rikka.app/) を端末にセットアップ済みなら、rish 経由でインストールできる。rish は adb と同じ shell uid で動作するため、信頼されたインストーラーとして扱われる。
+
+```
+rish -c "pm install /path/to/app-debug.apk"
+```
+
+### APKタップでインストール済みの場合
+
+一度アンインストールしてから上記いずれかの方法で再インストールする。
+
+```
+adb uninstall com.lumakernel.dimore
+adb install app/build/outputs/apk/debug/app-debug.apk
+```
+
+### 権限だけ手動で付与する方法 (Shizuku)
+
+APKタップでインストール済みでも、オーバーレイ権限だけ手動で許可できる。
+
+```
+rish -c "appops set com.lumakernel.dimore SYSTEM_ALERT_WINDOW allow"
 ```
 
 ## 使い方
