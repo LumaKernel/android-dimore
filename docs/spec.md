@@ -1,9 +1,21 @@
 # dimore spec
 
 - アプリ名: dimore (dim + more)
-- 配布形態: adb install によるAPKインストール (ストア配布なし、APK直接タップ不可 — Enhanced Confirmation Mode による権限制限のため)
+- 配布形態: adb install または Shizuku (rish) によるAPKインストール (ストア配布なし、APK直接タップ不可 — Enhanced Confirmation Mode による権限制限のため)
 - 対応バージョン: Android 16
 - バージョニング: v{n}.0.0 形式。バージョン番号は整数としてバージョンファイルに記録する。CLAUDE.mdで更新毎の+1を強制する
+
+## 権限
+
+- SYSTEM_ALERT_WINDOW: オーバーレイ描画に必須。設定画面への遷移UIをアプリ内に設置
+- POST_NOTIFICATIONS: 通知表示に必要 (Android 13+)。アプリ起動時にランタイム権限を要求する
+- Enhanced Confirmation Mode (Android 15+): APK直接タップインストールでは上記権限が制限される。adb install または Shizuku rish 経由でインストールが必要
+
+## Shizuku 連携 (オプショナル)
+
+- Shizuku がインストール・起動済みの場合、アプリ内からオーバーレイ権限を自動付与できる
+- Shizuku 未導入の場合は従来通り手動で設定画面から許可する
+- Shizuku API への依存はオプショナル。Shizuku がなくてもアプリは動作する
 
 ## 機能
 

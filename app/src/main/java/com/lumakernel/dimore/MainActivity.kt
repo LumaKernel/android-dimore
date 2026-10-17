@@ -1,12 +1,15 @@
 package com.lumakernel.dimore
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +30,8 @@ import androidx.compose.ui.unit.dp
 class MainActivity : ComponentActivity() {
 
     private val overlayPermissionGranted = mutableStateOf(false)
+    private val notificationPermissionGranted = mutableStateOf(false)
+    private val shizukuAvailable = mutableStateOf(false)
     private val overlayActive = mutableStateOf(false)
     private val brightness = mutableFloatStateOf(OverlayService.DEFAULT_BRIGHTNESS)
 
@@ -36,9 +41,18 @@ class MainActivity : ComponentActivity() {
         overlayPermissionGranted.value = Settings.canDrawOverlays(this)
     }
 
+    private val notificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        notificationPermissionGranted.value = granted
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overlayPermissionGranted.value = Settings.canDrawOverlays(this)
+        notificationPermissionGranted.value = hasNotificationPermission()
+        shizukuAvailable.value = ShizukuHelper.isShizukuAvailable()
+        requestNotificationPermissionIfNeeded()
 
         if (savedInstanceState == null) {
             autoEnableIfConfigured()
@@ -51,7 +65,9 @@ class MainActivity : ComponentActivity() {
                         hasOverlayPermission = overlayPermissionGranted.value,
                         isOverlayActive = overlayActive.value,
                         brightness = brightness.floatValue,
+                        isShizukuAvailable = shizukuAvailable.value,
                         onRequestPermission = ::requestOverlayPermission,
+                        onGrantPermissionViaShizuku = ::grantOverlayPermissionViaShizuku,
                         onToggleOverlay = ::toggleOverlay,
                         onBrightnessChange = ::updateBrightness,
                         onOpenSettings = ::openSettings,
@@ -64,6 +80,18 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         overlayPermissionGranted.value = Settings.canDrawOverlays(this)
+        notificationPermissionGranted.value = hasNotificationPermission()
+        shizukuAvailable.value = ShizukuHelper.isShizukuAvailable()
+    }
+
+    private fun hasNotificationPermission(): Boolean =
+        ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+            PackageManager.PERMISSION_GRANTED
+
+    private fun requestNotificationPermissionIfNeeded() {
+        if (!hasNotificationPermission()) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
     }
 
     private fun requestOverlayPermission() {
@@ -101,6 +129,17 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun grantOverlayPermissionViaShizuku() {
+        Thread {
+            val granted = ShizukuHelper.grantOverlayPermission(packageName)
+            if (granted) {
+                runOnUiThread {
+                    overlayPermissionGranted.value = Settings.canDrawOverlays(this)
+                }
+            }
+        }.start()
+    }
+
     private fun openSettings() {
         startActivity(Intent(this, SettingsActivity::class.java))
     }
@@ -121,7 +160,9 @@ private fun MainScreen(
     hasOverlayPermission: Boolean,
     isOverlayActive: Boolean,
     brightness: Float,
+    isShizukuAvailable: Boolean,
     onRequestPermission: () -> Unit,
+    onGrantPermissionViaShizuku: () -> Unit,
     onToggleOverlay: () -> Unit,
     onBrightnessChange: (Float) -> Unit,
     onOpenSettings: () -> Unit,
@@ -148,6 +189,14 @@ private fun MainScreen(
                 modifier = Modifier.padding(top = 8.dp),
             ) {
                 Text("権限を許可する")
+            }
+            if (isShizukuAvailable) {
+                Button(
+                    onClick = onGrantPermissionViaShizuku,
+                    modifier = Modifier.padding(top = 8.dp),
+                ) {
+                    Text("Shizuku で権限を付与")
+                }
             }
         } else {
             Button(

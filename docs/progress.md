@@ -2,8 +2,8 @@
 
 ## 現在のステータス
 
-- フェーズ: フェーズ 5 (統合・仕上げ)
-- 残タスク: QA (adb install で再インストール後、全機能動作確認)
+- フェーズ: フェーズ 8 (権限管理)
+- 残タスク: 権限管理 QA (実機確認待ち)、未コミット変更のコミット
 - ビルド: 成功確認済み
 
 ## 完了済み
@@ -28,3 +28,14 @@
 - README 作成
 - ビルド修正 (settings.gradle.kts, compileSdk 警告抑制)
 - Enhanced Confirmation Mode 対応: adb install 必須をドキュメント全体に反映
+- オーバーレイ alpha 修正: View.alpha → Color.argb (FLAG_NOT_TOUCHABLE の 0.8 制限回避)
+- オフ時通知 dismiss_10s 修正: stopSelf() タイミングを遅延実行後に変更
+- QA 完了: エミュレータで全機能動作確認
+- ランチャーアイコン設定: dimore-icon-09-bulb、Adaptive Icon + 各密度 mipmap
+- 通知アイコン変更: ic_notification Vector Drawable (SVGから変換した電球シルエット)
+- アイコン QA 完了: ランチャー (Adaptive Icon) ・通知ともにエミュレータで確認
+- README インストール手順拡充: adb install / Shizuku rish / appops set の3パターン
+- spec.md 更新: 権限セクション追加 (POST_NOTIFICATIONS, Shizuku 連携)
+- POST_NOTIFICATIONS ランタイム権限要求: onCreate で要求、onResume で状態更新
+- Shizuku 連携: ShizukuHelper (IShizukuService.newProcess で appops set 実行)、MainActivity に「Shizuku で権限を付与」ボタン (Shizuku 利用可能時のみ表示)
+- ANR修正: grantOverlayPermissionViaShizuku をバックグラウンドスレッドで実行するよう変更

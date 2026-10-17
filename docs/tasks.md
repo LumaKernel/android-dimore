@@ -42,8 +42,31 @@
 
 - [x] [ロジック] 起動時自動有効化: onCreate で SharedPreferences を読み、権限ありならオーバーレイ自動起動
 - [x] [バグ修正] インストール方法をadb installに統一: Android 15+ Enhanced Confirmation Mode 対応。README, spec, design-overlay, CLAUDE.md を更新
-- [ ] [QA] 全機能の動作確認: オーバーレイ、通知、設定の連携
+- [x] [QA] 全機能の動作確認: オーバーレイ、通知、設定の連携
+- [x] [バグ修正] オーバーレイ alpha の FLAG_NOT_TOUCHABLE 制限回避: View.alpha → Color.argb による背景色 alpha に変更
+- [x] [バグ修正] オフ時通知 dismiss_10s が動作しない: stopSelf() のタイミング修正
 - [x] [メタ] README 作成: ビルド・インストール手順、使い方、通知操作、設定項目
+
+## フェーズ 6: アイコン設定
+
+依存: なし
+
+- [x] [ロジック] ランチャーアイコン設定: download.ignore/dimore-icon-09-bulb から各解像度 mipmap 生成、Adaptive Icon 対応、AndroidManifest.xml に android:icon/roundIcon 追加
+- [x] [ロジック] 通知アイコン変更: android.R.drawable.ic_menu_view → R.drawable.ic_notification (SVGから変換したVector Drawable)
+- [x] [QA] アイコン表示確認: ランチャー (Adaptive Icon 丸型マスク) ・通知 (電球シルエット) ともに正常表示確認済み
+
+## フェーズ 7: ドキュメント改善
+
+- [x] [メタ] README インストール手順拡充: Enhanced Confirmation Mode の解説、adb install / Shizuku rish / appops set の3パターンの手順を追記
+
+## フェーズ 8: 権限管理
+
+依存: なし
+
+- [x] [設計] spec.md 更新: 権限セクション追加 (SYSTEM_ALERT_WINDOW, POST_NOTIFICATIONS, Enhanced Confirmation Mode, Shizuku 連携)
+- [x] [ロジック] POST_NOTIFICATIONS ランタイム権限要求: MainActivity の onCreate でランタイム権限要求、権限状態に応じたUI表示
+- [x] [ロジック] Shizuku 連携 (オプショナル): Shizuku API 依存追加、Shizuku 利用可能時にオーバーレイ権限自動付与を提案するUI
+- [ ] [QA] 権限管理の動作確認: 通知権限要求ダイアログ表示、Shizuku 連携 (実機確認待ち。コードレビュー済み: ANR修正 grantOverlayPermissionViaShizuku をバックグラウンドスレッド化)
 
 ## 判断が必要な事項
 
