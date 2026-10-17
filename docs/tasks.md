@@ -3,9 +3,9 @@
 ## フェーズ 1: プロジェクト基盤
 
 - [x] [設計] CLAUDE.md 作成: バージョニング v{n}.0.0 形式、バージョンファイルの整数を更新毎に +1 する強制ルール、開発規約
-- [ ] [設計] Android プロジェクトスキャフォールド: Kotlin, Jetpack Compose, targetSdk=Android 16, minSdk 要検討
-- [ ] [型] バージョンファイル作成: 整数 1 を記録するファイル (version.txt 等)
-- [ ] [ロジック] ビルド設定: build.gradle.kts, バージョンファイル読み込み, APK 出力設定 (ストア配布なし、APK 直接インストール前提)
+- [x] [設計] Android プロジェクトスキャフォールド: Kotlin, Jetpack Compose, targetSdk=Android 16, minSdk=36 (Android 16 のみ)
+- [x] [型] バージョンファイル作成: version.txt に整数 1 を記録
+- [x] [ロジック] ビルド設定: build.gradle.kts, バージョンファイル読み込み, APK 出力設定 (ストア配布なし、APK 直接インストール前提)
 
 ## フェーズ 2: コア機能 (オーバーレイ)
 
@@ -46,5 +46,5 @@
 
 ## 判断が必要な事項
 
-- minSdk をどこに設定するか (Android 16 のみ対応 = API 36 のみ? それとも下位互換?)
+- ~~minSdk をどこに設定するか~~ → API 36 のみ (Android 16 専用) に決定
 - 通知からの明度調整は技術的に RemoteViews のスライダーで実現可能か、アプリ内遷移にするか
