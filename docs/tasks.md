@@ -158,8 +158,24 @@
 - [x] [ロジック] 署名 keystore 生成 + GitHub Secrets 設定 (KEYSTORE_BASE64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD)
 - [x] [ロジック] CD ワークフローにタグ/version.txt 整合性チェック追加
 - [x] [メタ] CLAUDE.md 更新: version.txt 変更時にリリースするか確認するルール追加
-- [ ] [ロジック] 初回リリース: v27.0.0 タグ push → GitHub Release + 署名済み APK
-- [ ] [QA] リリースワークフロー動作確認
+- [x] [ロジック] 初回リリース: v27.0.0 タグ push → GitHub Release + 署名済み APK (PKCS12 keystore で JDK17 互換対応)
+- [x] [QA] リリースワークフロー動作確認: v27.0.0 リリース成功確認済み
+
+## フェーズ 20: Quick Settings 長押し動作
+
+依存: Phase 18
+
+- [x] [設計] spec.md 更新: 全タイル共通で長押し時に MainActivity を開く定義を追加
+- [ ] [ロジック] 全 TileService に長押し時の遷移先設定: AndroidManifest.xml で各タイルに MainActivity への meta-data 追加
+- [ ] [QA] 長押し動作確認
+
+## フェーズ 21: APK ファイル名改善
+
+依存: なし
+
+- [ ] [ロジック] APK ファイル名変更: app-release.apk → dimore-v{n}.0.0.apk (build.gradle.kts の applicationVariants で制御)
+- [ ] [ロジック] release.yml 更新: APK パスを新ファイル名に合わせて変更
+- [ ] [QA] リリースで正しいファイル名の APK がアップロードされること
 
 ## 判断が必要な事項
 
