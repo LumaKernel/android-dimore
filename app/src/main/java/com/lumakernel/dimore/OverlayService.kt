@@ -237,7 +237,7 @@ class OverlayService : Service() {
         return Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("dimore")
             .setContentText("オーバーレイ停止中")
-            .setSmallIcon(android.R.drawable.ic_menu_view)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentIntent(contentIntent)
             .addAction(Notification.Action.Builder(null, "ON", startIntent).build())
             .build()
