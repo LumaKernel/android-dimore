@@ -143,7 +143,7 @@
 依存: なし
 
 - [x] [設計] spec.md 更新: Quick Settings タイルセクション追加 (6 タイル定義、状態共有方針)
-- [ ] [ロジック] オーバーレイ状態の SharedPreferences 書き出し: OverlayService が有効/無効状態と現在明度を SharedPreferences に書き出す。MainActivity も同期する
+- [x] [ロジック] オーバーレイ状態の SharedPreferences 書き出し: OverlayService が有効/無効状態と現在明度を SharedPreferences に書き出す
 - [ ] [ロジック] TileService 実装: 6 タイル (OpenAppTile, OverlayOnTile, OverlayOffTile, OverlayToggleTile, BrightnessUpTile, BrightnessDownTile)。トグルタイルは STATE_ACTIVE/STATE_INACTIVE で状態反映
 - [ ] [ロジック] AndroidManifest.xml: 6 つの TileService の <service> 宣言 + ACTION_QS_TILE intent-filter + アイコン・ラベル
 - [ ] [QA] Quick Settings タイル動作確認: 各タイルの追加・操作・状態反映

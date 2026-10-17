@@ -35,6 +35,10 @@ class OverlayService : Service() {
 
     private var overlayView: View? = null
     private var currentBrightness: Float = DEFAULT_BRIGHTNESS
+
+    private val overlayStatePrefs by lazy {
+        getSharedPreferences("dimore_overlay_state", MODE_PRIVATE)
+    }
     private val handler = Handler(Looper.getMainLooper())
     private val dismissNotificationRunnable =
         Runnable {
@@ -65,6 +69,7 @@ class OverlayService : Service() {
             }
             ACTION_STOP -> {
                 removeOverlay()
+                saveOverlayState(active = false, brightness = currentBrightness)
                 stopForeground(STOP_FOREGROUND_REMOVE)
                 showInactiveNotification()
             }
@@ -120,6 +125,7 @@ class OverlayService : Service() {
 
         windowManager.addView(view, params)
         overlayView = view
+        saveOverlayState(active = true, brightness = clamped)
     }
 
     private fun removeOverlay() {
@@ -134,6 +140,17 @@ class OverlayService : Service() {
         val clamped = brightness.coerceIn(0.0f, MAX_BRIGHTNESS)
         view.setBackgroundColor(brightnessToColor(clamped))
         currentBrightness = clamped
+        saveOverlayState(active = true, brightness = clamped)
+    }
+
+    private fun saveOverlayState(
+        active: Boolean,
+        brightness: Float,
+    ) {
+        overlayStatePrefs.edit()
+            .putBoolean("overlay_active", active)
+            .putFloat("brightness", brightness)
+            .apply()
     }
 
     private fun brightnessToColor(brightness: Float): Int {

@@ -4,7 +4,7 @@
 
 - フェーズ: Phase 18 設計完了、実装待ち
 - 残タスク:
-  - Phase 18: Quick Settings タイル — 設計完了、実装待ち (最優先)
+  - Phase 18: Quick Settings タイル — 状態共有基盤完了、TileService 実装待ち (最優先)
   - Phase 16: UI トップにアイコン表示 — QA 待ち
   - Phase 17: ON/OFF ラベル改善 — QA 待ち
   - Phase 8: 権限管理 QA (実機確認待ち)
@@ -72,3 +72,4 @@
 - メイン画面にアプリアイコン表示: Image + painterResource(R.mipmap.ic_launcher) で 72dp 表示
 - トグルボタンラベル変更: 「オーバーレイ ON/OFF」→「暗くする」/「停止する」に変更 (アクション明示型)
 - spec.md 更新: Quick Settings タイルセクション追加 (6 タイル: アプリを開く/オン/オフ/トグル/明度上げ/下げ)
+- OverlayService 状態共有: overlay_active/brightness を SharedPreferences (dimore_overlay_state) に書き出し
