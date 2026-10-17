@@ -2,9 +2,11 @@
 
 ## 現在のステータス
 
-- フェーズ: Phase 18 設計完了、実装待ち
+- フェーズ: Phase 20, 21 実装完了
 - 残タスク:
-  - Phase 18: Quick Settings タイル — 実装完了、QA 待ち
+  - Phase 20: QS 長押し動作 — QA 待ち
+  - Phase 21: APK ファイル名改善 — QA 待ち
+  - Phase 18: Quick Settings タイル — QA 待ち
   - Phase 16: UI トップにアイコン表示 — QA 待ち
   - Phase 17: ON/OFF ラベル改善 — QA 待ち
   - Phase 8: 権限管理 QA (実機確認待ち)
@@ -81,3 +83,6 @@
 - 署名 keystore 生成 + GitHub Secrets 4 件設定
 - CD ワークフローにタグ/version.txt 整合性チェック追加
 - CLAUDE.md 更新: version.txt 変更時にリリース確認ルール追加
+- 初回リリース v27.0.0 完了: 署名 keystore (PKCS12) 生成、GitHub Secrets 設定、タグ/version.txt 整合性チェック追加
+- QS タイル長押し: MainActivity に QS_TILE_PREFERENCES intent-filter 追加
+- APK ファイル名: app-release.apk → dimore-v{n}.0.0.apk に変更

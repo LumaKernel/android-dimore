@@ -69,6 +69,13 @@ android {
         compose = true
         buildConfig = true
     }
+
+    applicationVariants.all {
+        outputs.all {
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+                "dimore-v$appVersion.0.0.apk"
+        }
+    }
 }
 
 dependencies {

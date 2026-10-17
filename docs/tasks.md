@@ -166,15 +166,15 @@
 依存: Phase 18
 
 - [x] [設計] spec.md 更新: 全タイル共通で長押し時に MainActivity を開く定義を追加
-- [ ] [ロジック] 全 TileService に長押し時の遷移先設定: AndroidManifest.xml で各タイルに MainActivity への meta-data 追加
+- [x] [ロジック] 全 TileService に長押し時の遷移先設定: MainActivity に QS_TILE_PREFERENCES intent-filter 追加
 - [ ] [QA] 長押し動作確認
 
 ## フェーズ 21: APK ファイル名改善
 
 依存: なし
 
-- [ ] [ロジック] APK ファイル名変更: app-release.apk → dimore-v{n}.0.0.apk (build.gradle.kts の applicationVariants で制御)
-- [ ] [ロジック] release.yml 更新: APK パスを新ファイル名に合わせて変更
+- [x] [ロジック] APK ファイル名変更: app-release.apk → dimore-v{n}.0.0.apk (build.gradle.kts の applicationVariants で制御)
+- [x] [ロジック] release.yml 更新: APK パスを glob (dimore-*.apk) に変更
 - [ ] [QA] リリースで正しいファイル名の APK がアップロードされること
 
 ## 判断が必要な事項
