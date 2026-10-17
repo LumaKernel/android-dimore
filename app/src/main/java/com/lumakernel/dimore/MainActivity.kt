@@ -240,14 +240,20 @@ private fun MainScreen(
                 ) {
                     Text("Shizuku で権限を付与")
                 }
-            }
-            if (isShizukuAvailable && !hasShizukuPermission) {
+            } else if (isShizukuAvailable && !hasShizukuPermission) {
                 Button(
                     onClick = onRequestShizukuPermission,
                     modifier = Modifier.padding(top = 8.dp),
                 ) {
                     Text("Shizuku 権限を許可する")
                 }
+            } else {
+                Text(
+                    text = "Shizuku を導入すると PC なしで権限を付与できます",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 16.dp),
+                )
             }
         } else {
             Button(
