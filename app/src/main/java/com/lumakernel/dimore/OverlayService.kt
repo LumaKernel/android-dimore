@@ -8,7 +8,9 @@ import android.app.Service
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PixelFormat
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -24,6 +26,7 @@ class OverlayService : Service() {
         const val EXTRA_BRIGHTNESS = "brightness"
 
         private const val NOTIFICATION_ID = 1
+        private const val INACTIVE_NOTIFICATION_ID = 2
         private const val CHANNEL_ID = "dimore_overlay"
 
         const val DEFAULT_BRIGHTNESS = 0.5f
@@ -33,6 +36,11 @@ class OverlayService : Service() {
 
     private var overlayView: View? = null
     private var currentBrightness: Float = DEFAULT_BRIGHTNESS
+    private val handler = Handler(Looper.getMainLooper())
+    private val dismissNotificationRunnable = Runnable {
+        val manager = getSystemService(NotificationManager::class.java)
+        manager.cancel(INACTIVE_NOTIFICATION_ID)
+    }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -44,11 +52,15 @@ class OverlayService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             ACTION_START -> {
+                handler.removeCallbacks(dismissNotificationRunnable)
+                val manager = getSystemService(NotificationManager::class.java)
+                manager.cancel(INACTIVE_NOTIFICATION_ID)
                 val brightness = intent.getFloatExtra(EXTRA_BRIGHTNESS, DEFAULT_BRIGHTNESS)
                 startOverlay(brightness)
             }
             ACTION_STOP -> {
                 removeOverlay()
+                showInactiveNotification()
                 stopForeground(STOP_FOREGROUND_REMOVE)
                 stopSelf()
             }
@@ -71,6 +83,7 @@ class OverlayService : Service() {
 
     override fun onDestroy() {
         removeOverlay()
+        handler.removeCallbacks(dismissNotificationRunnable)
         super.onDestroy()
     }
 
@@ -123,6 +136,26 @@ class OverlayService : Service() {
         manager.notify(NOTIFICATION_ID, buildActiveNotification(currentBrightness))
     }
 
+    private fun showInactiveNotification() {
+        val prefs = getSharedPreferences("dimore_settings", MODE_PRIVATE)
+        val offNotificationMode = prefs.getString("off_notification_mode", "always") ?: "always"
+
+        val manager = getSystemService(NotificationManager::class.java)
+
+        when (offNotificationMode) {
+            "always" -> {
+                manager.notify(INACTIVE_NOTIFICATION_ID, buildInactiveNotification())
+            }
+            "dismiss_0s" -> {
+                // 即時非表示: 通知を出さない
+            }
+            "dismiss_10s" -> {
+                manager.notify(INACTIVE_NOTIFICATION_ID, buildInactiveNotification())
+                handler.postDelayed(dismissNotificationRunnable, 10_000L)
+            }
+        }
+    }
+
     private fun createNotificationChannel() {
         val channel = NotificationChannel(
             CHANNEL_ID,
@@ -173,6 +206,33 @@ class OverlayService : Service() {
             .addAction(Notification.Action.Builder(null, "OFF", stopIntent).build())
             .addAction(Notification.Action.Builder(null, "暗く", brightnessUpIntent).build())
             .addAction(Notification.Action.Builder(null, "明るく", brightnessDownIntent).build())
+            .build()
+    }
+
+    private fun buildInactiveNotification(): Notification {
+        val startIntent = PendingIntent.getService(
+            this,
+            4,
+            Intent(this, OverlayService::class.java).apply {
+                action = ACTION_START
+                putExtra(EXTRA_BRIGHTNESS, currentBrightness)
+            },
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+        )
+
+        val contentIntent = PendingIntent.getActivity(
+            this,
+            0,
+            Intent(this, MainActivity::class.java),
+            PendingIntent.FLAG_IMMUTABLE,
+        )
+
+        return Notification.Builder(this, CHANNEL_ID)
+            .setContentTitle("dimore")
+            .setContentText("オーバーレイ停止中")
+            .setSmallIcon(android.R.drawable.ic_menu_view)
+            .setContentIntent(contentIntent)
+            .addAction(Notification.Action.Builder(null, "ON", startIntent).build())
             .build()
     }
 }
