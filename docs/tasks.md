@@ -41,6 +41,7 @@
 依存: フェーズ 1〜4 完了
 
 - [x] [ロジック] 起動時自動有効化: onCreate で SharedPreferences を読み、権限ありならオーバーレイ自動起動
+- [x] [バグ修正] インストール方法をadb installに統一: Android 15+ Enhanced Confirmation Mode 対応。README, spec, design-overlay, CLAUDE.md を更新
 - [ ] [QA] 全機能の動作確認: オーバーレイ、通知、設定の連携
 - [x] [メタ] README 作成: ビルド・インストール手順、使い方、通知操作、設定項目
 

@@ -1,7 +1,7 @@
 # dimore spec
 
 - アプリ名: dimore (dim + more)
-- 配布形態: APKインストール (ストア配布なし)
+- 配布形態: adb install によるAPKインストール (ストア配布なし、APK直接タップ不可 — Enhanced Confirmation Mode による権限制限のため)
 - 対応バージョン: Android 16
 - バージョニング: v{n}.0.0 形式。バージョン番号は整数としてバージョンファイルに記録する。CLAUDE.mdで更新毎の+1を強制する
 

@@ -2,7 +2,7 @@
 
 画面を暗くするAndroidアプリ。ソフトウェアオーバーレイで画面上に半透明の黒いレイヤーを被せる。
 
-Android 16 (API 36) 専用。APK直接インストール。
+Android 16 (API 36) 専用。adb install でインストール。
 
 ## ビルド
 
@@ -13,6 +13,8 @@ ANDROID_HOME=/path/to/android-sdk ./gradlew assembleDebug
 APKは `app/build/outputs/apk/debug/app-debug.apk` に出力される。
 
 ## インストール
+
+`adb install` を使うこと。APKファイルを端末上で直接タップしてインストールすると、Android 15+ の Enhanced Confirmation Mode により SYSTEM_ALERT_WINDOW 権限が制限され、オーバーレイが使用できない。
 
 ```
 adb install app/build/outputs/apk/debug/app-debug.apk

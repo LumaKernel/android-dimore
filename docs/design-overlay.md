@@ -7,6 +7,7 @@
 - `Settings.canDrawOverlays(context)` で権限状態を確認
 - 未許可の場合、`Settings.ACTION_MANAGE_OVERLAY_PERMISSION` で設定画面へ遷移させる
 - この権限はランタイムパーミッションではなく、設定画面での手動許可が必要
+- Android 15+ の Enhanced Confirmation Mode により、APKファイルを直接タップしてインストールしたアプリは SYSTEM_ALERT_WINDOW が制限される ("App was denied access")。adb install でインストールすれば信頼済みインストーラー扱いとなり回避可能
 
 ## オーバーレイ描画
 

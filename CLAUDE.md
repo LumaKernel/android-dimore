@@ -12,7 +12,7 @@
 - 言語: Kotlin
 - UI: Jetpack Compose
 - ターゲット: Android 16 (API 36)
-- 配布: APK 直接インストール (Google Play 非使用)
+- 配布: adb install によるAPKインストール (Google Play 非使用、APK直接タップ不可)
 
 ## プロジェクト構造
 

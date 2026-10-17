@@ -3,8 +3,8 @@
 ## 現在のステータス
 
 - フェーズ: フェーズ 5 (統合・仕上げ)
-- 残タスク: QA (ビルド・実機確認が必要)
-- 備考: ビルド確認未実施。ユーザーによるビルド・実機テストが必要
+- 残タスク: QA (adb install で再インストール後、全機能動作確認)
+- ビルド: 成功確認済み
 
 ## 完了済み
 
@@ -26,3 +26,5 @@
 - 設定永続化: SharedPreferences
 - 起動時自動有効化
 - README 作成
+- ビルド修正 (settings.gradle.kts, compileSdk 警告抑制)
+- Enhanced Confirmation Mode 対応: adb install 必須をドキュメント全体に反映
