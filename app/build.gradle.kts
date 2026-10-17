@@ -18,8 +18,21 @@ android {
         versionCode = appVersion
         versionName = "v$appVersion.0.0"
 
-        val repo = System.getenv("GITHUB_REPOSITORY") ?: "LumaKernel/android-dimore"
-        buildConfigField("String", "REPOSITORY_URL", "\"https://github.com/$repo\"")
+        val repoUrl =
+            System.getenv("GITHUB_REPOSITORY")?.let { "https://github.com/$it" }
+                ?: try {
+                    val process =
+                        ProcessBuilder("git", "remote", "get-url", "origin")
+                            .directory(rootProject.projectDir)
+                            .redirectErrorStream(true)
+                            .start()
+                    process.inputStream.bufferedReader().readText().trim()
+                        .replace(Regex("\\.git$"), "")
+                        .replace(Regex("^git@github\\.com:"), "https://github.com/")
+                } catch (_: Exception) {
+                    ""
+                }
+        buildConfigField("String", "REPOSITORY_URL", "\"$repoUrl\"")
     }
 
     signingConfigs {
