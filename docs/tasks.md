@@ -80,6 +80,10 @@
 - [ ] [メタ] CLAUDE.md 更新: CI/CD 関連の規約 (ktlint フォーマット必須、tag push でリリース)
 - [ ] [QA] CI/CD 動作確認: CI が PR で動作、tag push でリリース APK が生成されること
 
+## フェーズ 10: README 改善
+
+- [x] [メタ] README リデザイン: アイコン画像、GitHub Releases 導線、テーブル形式、GitHub Alerts 活用
+
 ## 判断が必要な事項
 
 - ~~minSdk をどこに設定するか~~ → API 36 のみ (Android 16 専用) に決定
