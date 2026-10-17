@@ -9,7 +9,6 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,8 +25,8 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import rikka.shizuku.Shizuku
 
@@ -220,9 +219,13 @@ private fun MainScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Image(
-            painter = painterResource(id = R.mipmap.ic_launcher),
-            contentDescription = "dimore アイコン",
+        AndroidView(
+            factory = { context ->
+                android.widget.ImageView(context).apply {
+                    setImageResource(R.mipmap.ic_launcher)
+                    contentDescription = "dimore アイコン"
+                }
+            },
             modifier = Modifier.size(72.dp),
         )
         Text(
