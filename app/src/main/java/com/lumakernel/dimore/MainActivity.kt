@@ -26,13 +26,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import rikka.shizuku.Shizuku
 
 class MainActivity : ComponentActivity() {
     private val overlayPermissionGranted = mutableStateOf(false)
     private val notificationPermissionGranted = mutableStateOf(false)
     private val shizukuAvailable = mutableStateOf(false)
+    private val shizukuPermissionGranted = mutableStateOf(false)
     private val overlayActive = mutableStateOf(false)
     private val brightness = mutableFloatStateOf(OverlayService.DEFAULT_BRIGHTNESS)
+
+    private val shizukuPermissionResultListener =
+        Shizuku.OnRequestPermissionResultListener { _, grantResult ->
+            shizukuPermissionGranted.value =
+                grantResult == PackageManager.PERMISSION_GRANTED
+        }
 
     private val overlayPermissionLauncher =
         registerForActivityResult(
@@ -52,7 +60,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         overlayPermissionGranted.value = Settings.canDrawOverlays(this)
         notificationPermissionGranted.value = hasNotificationPermission()
-        shizukuAvailable.value = ShizukuHelper.isShizukuAvailable()
+        updateShizukuState()
+        Shizuku.addRequestPermissionResultListener(shizukuPermissionResultListener)
         requestNotificationPermissionIfNeeded()
 
         if (savedInstanceState == null) {
@@ -68,8 +77,10 @@ class MainActivity : ComponentActivity() {
                         isOverlayActive = overlayActive.value,
                         brightness = brightness.floatValue,
                         isShizukuAvailable = shizukuAvailable.value,
+                        hasShizukuPermission = shizukuPermissionGranted.value,
                         onRequestPermission = ::requestOverlayPermission,
                         onRequestNotificationPermission = ::requestNotificationPermission,
+                        onRequestShizukuPermission = ::requestShizukuPermission,
                         onGrantPermissionViaShizuku = ::grantOverlayPermissionViaShizuku,
                         onToggleOverlay = ::toggleOverlay,
                         onBrightnessChange = ::updateBrightness,
@@ -84,7 +95,22 @@ class MainActivity : ComponentActivity() {
         super.onResume()
         overlayPermissionGranted.value = Settings.canDrawOverlays(this)
         notificationPermissionGranted.value = hasNotificationPermission()
+        updateShizukuState()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Shizuku.removeRequestPermissionResultListener(shizukuPermissionResultListener)
+    }
+
+    private fun updateShizukuState() {
         shizukuAvailable.value = ShizukuHelper.isShizukuAvailable()
+        shizukuPermissionGranted.value =
+            shizukuAvailable.value && ShizukuHelper.hasShizukuPermission()
+    }
+
+    private fun requestShizukuPermission() {
+        Shizuku.requestPermission(SHIZUKU_PERMISSION_REQUEST_CODE)
     }
 
     private fun hasNotificationPermission(): Boolean =
@@ -161,6 +187,10 @@ class MainActivity : ComponentActivity() {
             startService(intent)
         }
     }
+
+    companion object {
+        private const val SHIZUKU_PERMISSION_REQUEST_CODE = 1001
+    }
 }
 
 @Composable
@@ -170,8 +200,10 @@ private fun MainScreen(
     isOverlayActive: Boolean,
     brightness: Float,
     isShizukuAvailable: Boolean,
+    hasShizukuPermission: Boolean,
     onRequestPermission: () -> Unit,
     onRequestNotificationPermission: () -> Unit,
+    onRequestShizukuPermission: () -> Unit,
     onGrantPermissionViaShizuku: () -> Unit,
     onToggleOverlay: () -> Unit,
     onBrightnessChange: (Float) -> Unit,
@@ -201,12 +233,20 @@ private fun MainScreen(
             ) {
                 Text("権限を許可する")
             }
-            if (isShizukuAvailable) {
+            if (isShizukuAvailable && hasShizukuPermission) {
                 Button(
                     onClick = onGrantPermissionViaShizuku,
                     modifier = Modifier.padding(top = 8.dp),
                 ) {
                     Text("Shizuku で権限を付与")
+                }
+            }
+            if (isShizukuAvailable && !hasShizukuPermission) {
+                Button(
+                    onClick = onRequestShizukuPermission,
+                    modifier = Modifier.padding(top = 8.dp),
+                ) {
+                    Text("Shizuku 権限を許可する")
                 }
             }
         } else {
