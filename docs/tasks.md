@@ -75,7 +75,7 @@
 - [x] [設計] CI/CD 設計: docs/design-ci-cd.md に記載。GitHub Actions、ktlint、署名、自動リリース
 - [x] [ロジック] CI workflow: .github/workflows/ci.yml — push/PR で lint (ktlint), compile check (assembleDebug)
 - [x] [ロジック] ktlint 導入: build.gradle.kts に ktlint プラグイン追加、.editorconfig で Compose 関数名許可、既存コードフォーマット修正
-- [ ] [ロジック] リリース署名設定: app/build.gradle.kts に signingConfigs 追加 (環境変数/GitHub Secrets から keystore 読み込み)
+- [x] [ロジック] リリース署名設定: app/build.gradle.kts に signingConfigs 追加 (環境変数から keystore 読み込み、未設定時は debug fallback)
 - [ ] [ロジック] CD workflow: .github/workflows/release.yml — tag push (v*) で assembleRelease + GitHub Release に署名済み APK アップロード
 - [ ] [メタ] CLAUDE.md 更新: CI/CD 関連の規約 (ktlint フォーマット必須、tag push でリリース)
 - [ ] [QA] CI/CD 動作確認: CI が PR で動作、tag push でリリース APK が生成されること
