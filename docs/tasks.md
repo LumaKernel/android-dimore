@@ -13,9 +13,9 @@
 
 - [x] [設計] オーバーレイ設計: docs/design-overlay.md に記載。WindowManager + SYSTEM_ALERT_WINDOW、alpha 制御 (0.0〜0.9)、フォアグラウンドサービス
 - [x] [ロジック] 権限要求フロー: SYSTEM_ALERT_WINDOW 権限の宣言・確認・設定画面遷移
-- [ ] [ロジック] オーバーレイ描画: WindowManager で半透明黒 View を被せる
-- [ ] [ロジック] 明度制御: オーバーレイの alpha 値で明度を調整 (0.0〜1.0)
-- [ ] [ロジック] フォアグラウンドサービス: オーバーレイを維持するサービス
+- [x] [ロジック] オーバーレイ描画: WindowManager で半透明黒 View を被せる (OverlayService)
+- [x] [ロジック] 明度制御: オーバーレイの alpha 値で明度を調整 (0.0〜0.9)
+- [x] [ロジック] フォアグラウンドサービス: OverlayService (specialUse foregroundServiceType)
 
 ## フェーズ 3: 通知
 

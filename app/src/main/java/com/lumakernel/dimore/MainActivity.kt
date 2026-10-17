@@ -10,12 +10,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +27,8 @@ import androidx.compose.ui.unit.dp
 class MainActivity : ComponentActivity() {
 
     private val overlayPermissionGranted = mutableStateOf(false)
+    private val overlayActive = mutableStateOf(false)
+    private val brightness = mutableFloatStateOf(OverlayService.DEFAULT_BRIGHTNESS)
 
     private val overlayPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -40,7 +45,11 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     MainScreen(
                         hasOverlayPermission = overlayPermissionGranted.value,
+                        isOverlayActive = overlayActive.value,
+                        brightness = brightness.floatValue,
                         onRequestPermission = ::requestOverlayPermission,
+                        onToggleOverlay = ::toggleOverlay,
+                        onBrightnessChange = ::updateBrightness,
                     )
                 }
             }
@@ -59,12 +68,41 @@ class MainActivity : ComponentActivity() {
         )
         overlayPermissionLauncher.launch(intent)
     }
+
+    private fun toggleOverlay() {
+        if (overlayActive.value) {
+            val intent = Intent(this, OverlayService::class.java)
+            intent.action = OverlayService.ACTION_STOP
+            startService(intent)
+            overlayActive.value = false
+        } else {
+            val intent = Intent(this, OverlayService::class.java)
+            intent.action = OverlayService.ACTION_START
+            intent.putExtra(OverlayService.EXTRA_BRIGHTNESS, brightness.floatValue)
+            startForegroundService(intent)
+            overlayActive.value = true
+        }
+    }
+
+    private fun updateBrightness(value: Float) {
+        brightness.floatValue = value
+        if (overlayActive.value) {
+            val intent = Intent(this, OverlayService::class.java)
+            intent.action = OverlayService.ACTION_SET_BRIGHTNESS
+            intent.putExtra(OverlayService.EXTRA_BRIGHTNESS, value)
+            startService(intent)
+        }
+    }
 }
 
 @Composable
 private fun MainScreen(
     hasOverlayPermission: Boolean,
+    isOverlayActive: Boolean,
+    brightness: Float,
     onRequestPermission: () -> Unit,
+    onToggleOverlay: () -> Unit,
+    onBrightnessChange: (Float) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -90,9 +128,24 @@ private fun MainScreen(
                 Text("権限を許可する")
             }
         } else {
-            Text(
-                text = "オーバーレイ権限: 許可済み",
+            Button(
+                onClick = onToggleOverlay,
                 modifier = Modifier.padding(top = 24.dp),
+            ) {
+                Text(if (isOverlayActive) "オーバーレイ OFF" else "オーバーレイ ON")
+            }
+
+            Text(
+                text = "明度: ${(brightness * 100).toInt()}%",
+                modifier = Modifier.padding(top = 16.dp),
+            )
+            Slider(
+                value = brightness,
+                onValueChange = onBrightnessChange,
+                valueRange = 0.0f..OverlayService.MAX_BRIGHTNESS,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
             )
         }
     }
