@@ -1,0 +1,32 @@
+package com.lumakernel.dimore.tile
+
+import android.content.Intent
+import android.service.quicksettings.Tile
+import android.service.quicksettings.TileService
+import com.lumakernel.dimore.OverlayService
+
+class OverlayOnTile : TileService() {
+    override fun onStartListening() {
+        val prefs = getSharedPreferences("dimore_overlay_state", MODE_PRIVATE)
+        val active = prefs.getBoolean("overlay_active", false)
+        qsTile?.apply {
+            state = if (active) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
+            updateTile()
+        }
+    }
+
+    override fun onClick() {
+        val prefs = getSharedPreferences("dimore_overlay_state", MODE_PRIVATE)
+        val brightness = prefs.getFloat("brightness", OverlayService.DEFAULT_BRIGHTNESS)
+        val intent =
+            Intent(this, OverlayService::class.java).apply {
+                action = OverlayService.ACTION_START
+                putExtra(OverlayService.EXTRA_BRIGHTNESS, brightness)
+            }
+        startForegroundService(intent)
+        qsTile?.apply {
+            state = Tile.STATE_ACTIVE
+            updateTile()
+        }
+    }
+}

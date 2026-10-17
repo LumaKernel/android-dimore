@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">dimore</string>
+    <string name="tile_open_app">dimore を開く</string>
+    <string name="tile_overlay_on">暗くする</string>
+    <string name="tile_overlay_off">停止する</string>
+    <string name="tile_overlay_toggle">dimore 切替</string>
+    <string name="tile_brightness_up">明度を上げる</string>
+    <string name="tile_brightness_down">明度を下げる</string>
 </resources>
