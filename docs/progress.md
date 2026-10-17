@@ -3,8 +3,8 @@
 ## 現在のステータス
 
 - フェーズ: フェーズ 2 (コア機能)
-- 次のタスク: 権限要求フロー実装
-- 備考: ビルド確認未実施 (ユーザーが `ANDROID_HOME=/opt/homebrew/share/android-commandlinetools ./gradlew assembleDebug` で確認する必要あり)
+- 次のタスク: オーバーレイ描画
+- 備考: ビルド確認未実施
 
 ## 完了済み
 
@@ -15,3 +15,4 @@
 - version.txt 作成 (初期値: 1)
 - ビルド設定 (build.gradle.kts, version.txt 読み込み, APK 出力)
 - オーバーレイ設計 (docs/design-overlay.md)
+- 権限要求フロー (SYSTEM_ALERT_WINDOW)
