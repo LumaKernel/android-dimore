@@ -76,13 +76,18 @@
 - [x] [ロジック] CI workflow: .github/workflows/ci.yml — push/PR で lint (ktlint), compile check (assembleDebug)
 - [x] [ロジック] ktlint 導入: build.gradle.kts に ktlint プラグイン追加、.editorconfig で Compose 関数名許可、既存コードフォーマット修正
 - [x] [ロジック] リリース署名設定: app/build.gradle.kts に signingConfigs 追加 (環境変数から keystore 読み込み、未設定時は debug fallback)
-- [ ] [ロジック] CD workflow: .github/workflows/release.yml — tag push (v*) で assembleRelease + GitHub Release に署名済み APK アップロード
+- [x] [ロジック] CD workflow: .github/workflows/release.yml — tag push (v*) で assembleRelease + GitHub Release に署名済み APK アップロード
 - [ ] [メタ] CLAUDE.md 更新: CI/CD 関連の規約 (ktlint フォーマット必須、tag push でリリース)
 - [ ] [QA] CI/CD 動作確認: CI が PR で動作、tag push でリリース APK が生成されること
 
 ## フェーズ 10: README 改善
 
 - [x] [メタ] README リデザイン: アイコン画像、GitHub Releases 導線、テーブル形式、GitHub Alerts 活用
+
+## フェーズ 11: インストール手順の整理
+
+- [ ] [メタ] README インストールセクション修正: 「adb install」または「普通にインストールして adb/Shizuku で権限有効化」の2択に。Shizuku 経由インストール (rish pm install) と「APKタップでインストール済みの場合」セクションを削除。「権限だけ手動で付与する」セクションにアプリ内からも Shizuku で付与できる旨を追記
+- [ ] [メタ] spec.md 配布形態修正: 「Shizuku (rish) によるAPKインストール」の記述を削除、権限の有効化手段として整理
 
 ## 判断が必要な事項
 

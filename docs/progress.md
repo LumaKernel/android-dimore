@@ -3,7 +3,7 @@
 ## 現在のステータス
 
 - フェーズ: フェーズ 9 (CI/CD)
-- 残タスク: CD workflow, CLAUDE.md 更新, CI/CD QA
+- 残タスク: CLAUDE.md 更新, CI/CD QA, README/spec インストール手順整理
 - フェーズ 8 残: 権限管理 QA (実機確認待ち)
 - ビルド: 成功確認済み
 
@@ -44,3 +44,4 @@
 - ktlint 導入: org.jlleitschuh.gradle.ktlint 12.1.2、.editorconfig で Compose 関数名許可、全コードフォーマット済み
 - CI workflow: .github/workflows/ci.yml (ktlintCheck + assembleDebug, push/PR トリガー)
 - リリース署名設定: signingConfigs で KEYSTORE_FILE/PASSWORD/KEY_ALIAS/KEY_PASSWORD 環境変数から読み込み
+- CD workflow: .github/workflows/release.yml (tag push v* → assembleRelease → GitHub Release + APK)
