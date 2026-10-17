@@ -2,8 +2,9 @@
 
 ## 現在のステータス
 
-- フェーズ: フェーズ 11 (権限 UI 改善)
-- 残タスク: 権限UI QA, CI/CD QA (いずれも実機/CI確認待ち)
+- フェーズ: フェーズ 14 (Shizuku UI 常時表示)
+- 残タスク: Shizuku未インストール時UI実装 (Phase 14), 権限管理QA (Phase 8), CI/CD QA (Phase 9), 権限UI QA (Phase 11)
+- ブロッカー: 12コミット以上が未push。push すれば CI/CD QA を開始できる
 - フェーズ 8 残: 権限管理 QA (実機確認待ち)
 - ビルド: 成功確認済み
 
@@ -53,3 +54,4 @@
 - README インストールセクション修正: adb install / 通常インストール+権限調整の2択に整理、Shizuku rish・APKタップ済みセクション削除
 - spec.md 配布形態修正完了 (Shizuku rish インストール記述は既に削除済み)
 - UNLICENSE ファイル作成 + README ライセンスセクション更新
+- spec.md Shizuku UI 方針変更: 未インストール/未起動時も UI を表示する (隠さない)
