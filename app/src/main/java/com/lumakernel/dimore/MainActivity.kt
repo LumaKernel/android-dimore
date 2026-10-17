@@ -40,6 +40,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         overlayPermissionGranted.value = Settings.canDrawOverlays(this)
 
+        if (savedInstanceState == null) {
+            autoEnableIfConfigured()
+        }
+
         setContent {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
@@ -77,6 +81,18 @@ class MainActivity : ComponentActivity() {
             startService(intent)
             overlayActive.value = false
         } else {
+            val intent = Intent(this, OverlayService::class.java)
+            intent.action = OverlayService.ACTION_START
+            intent.putExtra(OverlayService.EXTRA_BRIGHTNESS, brightness.floatValue)
+            startForegroundService(intent)
+            overlayActive.value = true
+        }
+    }
+
+    private fun autoEnableIfConfigured() {
+        val prefs = getSharedPreferences("dimore_settings", MODE_PRIVATE)
+        val autoEnable = prefs.getBoolean("auto_enable_on_launch", false)
+        if (autoEnable && Settings.canDrawOverlays(this) && !overlayActive.value) {
             val intent = Intent(this, OverlayService::class.java)
             intent.action = OverlayService.ACTION_START
             intent.putExtra(OverlayService.EXTRA_BRIGHTNESS, brightness.floatValue)
