@@ -2,10 +2,14 @@
 
 ## 現在のステータス
 
-- フェーズ: フェーズ 14 (Shizuku UI 常時表示)
-- 残タスク: アプリ情報UI (Phase 15), Shizuku UI QA (Phase 14), 権限管理QA (Phase 8), CI/CD QA (Phase 9), 権限UI QA (Phase 11)
-- ブロッカー: 12コミット以上が未push。push すれば CI/CD QA を開始できる
-- フェーズ 8 残: 権限管理 QA (実機確認待ち)
+- フェーズ: 全実装完了、QA 待ち
+- 残タスク (QA のみ):
+  - Phase 8: 権限管理 QA (実機確認待ち)
+  - Phase 9: CI/CD QA (push 後に確認)
+  - Phase 11: 権限 UI QA (実機確認待ち)
+  - Phase 14: Shizuku UI QA (実機確認待ち)
+  - Phase 15: アプリ情報 QA (実機確認待ち)
+- ブロッカー: 20コミット以上が未push。push すれば CI/CD QA を開始できる
 - ビルド: 成功確認済み
 
 ## 完了済み
