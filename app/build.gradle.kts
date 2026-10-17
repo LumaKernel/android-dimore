@@ -1,3 +1,5 @@
+import java.net.URI
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -26,9 +28,14 @@ android {
                             .directory(rootProject.projectDir)
                             .redirectErrorStream(true)
                             .start()
-                    process.inputStream.bufferedReader().readText().trim()
-                        .replace(Regex("\\.git$"), "")
-                        .replace(Regex("^git@github\\.com:"), "https://github.com/")
+                    val raw = process.inputStream.bufferedReader().readText().trim()
+                    val parsed = URI(raw.replace(Regex("^([^@]+)@([^:]+):"), "$1://$2/"))
+                    URI(
+                        "https",
+                        parsed.host,
+                        parsed.path.removeSuffix(".git"),
+                        null,
+                    ).toString()
                 } catch (_: Exception) {
                     ""
                 }
