@@ -116,7 +116,7 @@
 依存: なし
 
 - [x] [設計] spec.md 更新: メイン画面にアプリ名+バージョン表示、アプリ情報 (About) セクション追加
-- [ ] [ロジック] メイン画面にバージョン表示: BuildConfig.VERSION_NAME を使ってアプリ名の下にバージョンを表示
+- [x] [ロジック] メイン画面にバージョン表示: BuildConfig.VERSION_NAME を使ってアプリ名の下にバージョンを表示
 - [ ] [ロジック] BuildConfig にリポジトリ URL 埋め込み: build.gradle.kts で GITHUB_REPOSITORY 環境変数から buildConfigField 追加、デフォルト値あり
 - [ ] [ロジック] CI/CD workflow 更新: assembleRelease/assembleDebug に GITHUB_REPOSITORY 環境変数を渡す
 - [ ] [UI] About 画面 / セクション: ビルド情報、ライセンス、利用ライブラリライセンス一覧、リポジトリ URL を表示

@@ -221,6 +221,11 @@ private fun MainScreen(
             text = "dimore",
             style = MaterialTheme.typography.headlineLarge,
         )
+        Text(
+            text = BuildConfig.VERSION_NAME,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
 
         if (!hasOverlayPermission) {
             Text(
