@@ -11,7 +11,7 @@
 
 依存: フェーズ 1 完了
 
-- [ ] [設計] オーバーレイ設計: WindowManager + SYSTEM_ALERT_WINDOW 権限、明度制御の実装方針
+- [x] [設計] オーバーレイ設計: docs/design-overlay.md に記載。WindowManager + SYSTEM_ALERT_WINDOW、alpha 制御 (0.0〜0.9)、フォアグラウンドサービス
 - [ ] [ロジック] 権限要求フロー: SYSTEM_ALERT_WINDOW 権限の要求・状態確認
 - [ ] [ロジック] オーバーレイ描画: WindowManager で半透明黒 View を被せる
 - [ ] [ロジック] 明度制御: オーバーレイの alpha 値で明度を調整 (0.0〜1.0)
