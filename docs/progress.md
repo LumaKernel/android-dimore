@@ -3,7 +3,7 @@
 ## 現在のステータス
 
 - フェーズ: フェーズ 9 (CI/CD)
-- 残タスク: CI/CD QA, README/spec インストール手順整理, 権限UI spec定義 (確認待ち)
+- 残タスク: 通知権限UI, Shizuku権限要求UI, 権限UI QA, CI/CD QA, インストール手順整理
 - フェーズ 8 残: 権限管理 QA (実機確認待ち)
 - ビルド: 成功確認済み
 
@@ -46,3 +46,5 @@
 - リリース署名設定: signingConfigs で KEYSTORE_FILE/PASSWORD/KEY_ALIAS/KEY_PASSWORD 環境変数から読み込み
 - CD workflow: .github/workflows/release.yml (tag push v* → assembleRelease → GitHub Release + APK)
 - CLAUDE.md 更新: ktlint 必須、CI チェック、リリース手順を追記
+- spec.md メイン画面 UI セクション追加: SYSTEM_ALERT_WINDOW / POST_NOTIFICATIONS / Shizuku の3権限ごとの状態分岐を定義
+- spec.md 配布形態修正: Shizuku rish インストール前提を削除、権限有効化手段として整理
