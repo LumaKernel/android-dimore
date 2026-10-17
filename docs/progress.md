@@ -2,10 +2,10 @@
 
 ## 現在のステータス
 
-- フェーズ: Phase 16 実装完了、Phase 17 実装待ち
+- フェーズ: Phase 16, 17 実装完了、QA 待ち
 - 残タスク:
-  - Phase 16: UI トップにアイコン表示 — 実装完了、QA 待ち
-  - Phase 17: ON/OFF ラベル改善 — 実装待ち
+  - Phase 16: UI トップにアイコン表示 — QA 待ち
+  - Phase 17: ON/OFF ラベル改善 — QA 待ち
   - Phase 8: 権限管理 QA (実機確認待ち)
   - Phase 9: CI/CD QA (push 後に確認)
   - Phase 11: 権限 UI QA (実機確認待ち)
@@ -69,3 +69,4 @@
 - 利用ライブラリライセンス一覧: AboutLibraries 導入、LicensesActivity で OSS ライセンス一覧表示、設定画面からリンク
 - spec.md 更新: メイン画面上部にアプリアイコン追加、トグルボタンラベルをアクション明示型に変更
 - メイン画面にアプリアイコン表示: Image + painterResource(R.mipmap.ic_launcher) で 72dp 表示
+- トグルボタンラベル変更: 「オーバーレイ ON/OFF」→「暗くする」/「停止する」に変更 (アクション明示型)

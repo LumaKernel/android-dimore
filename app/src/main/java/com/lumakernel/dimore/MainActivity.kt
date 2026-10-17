@@ -273,7 +273,7 @@ private fun MainScreen(
                 onClick = onToggleOverlay,
                 modifier = Modifier.padding(top = 24.dp),
             ) {
-                Text(if (isOverlayActive) "オーバーレイ OFF" else "オーバーレイ ON")
+                Text(if (isOverlayActive) "停止する" else "暗くする")
             }
 
             Text(
