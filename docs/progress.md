@@ -2,8 +2,8 @@
 
 ## 現在のステータス
 
-- フェーズ: フェーズ 9 (CI/CD)
-- 残タスク: 通知権限UI, Shizuku権限要求UI, 権限UI QA, CI/CD QA, インストール手順整理
+- フェーズ: フェーズ 11 (権限 UI 改善)
+- 残タスク: Shizuku権限要求UI, 権限UI QA, CI/CD QA, インストール手順整理, ライセンス
 - フェーズ 8 残: 権限管理 QA (実機確認待ち)
 - ビルド: 成功確認済み
 
@@ -48,3 +48,4 @@
 - CLAUDE.md 更新: ktlint 必須、CI チェック、リリース手順を追記
 - spec.md メイン画面 UI セクション追加: SYSTEM_ALERT_WINDOW / POST_NOTIFICATIONS / Shizuku の3権限ごとの状態分岐を定義
 - spec.md 配布形態修正: Shizuku rish インストール前提を削除、権限有効化手段として整理
+- 通知権限 UI: 未許可時に警告テキスト (error色) + 「通知を許可する」ボタン表示

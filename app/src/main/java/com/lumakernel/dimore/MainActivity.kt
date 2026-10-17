@@ -64,10 +64,12 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     MainScreen(
                         hasOverlayPermission = overlayPermissionGranted.value,
+                        hasNotificationPermission = notificationPermissionGranted.value,
                         isOverlayActive = overlayActive.value,
                         brightness = brightness.floatValue,
                         isShizukuAvailable = shizukuAvailable.value,
                         onRequestPermission = ::requestOverlayPermission,
+                        onRequestNotificationPermission = ::requestNotificationPermission,
                         onGrantPermissionViaShizuku = ::grantOverlayPermissionViaShizuku,
                         onToggleOverlay = ::toggleOverlay,
                         onBrightnessChange = ::updateBrightness,
@@ -93,6 +95,10 @@ class MainActivity : ComponentActivity() {
         if (!hasNotificationPermission()) {
             notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
+    }
+
+    private fun requestNotificationPermission() {
+        notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
     }
 
     private fun requestOverlayPermission() {
@@ -160,10 +166,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MainScreen(
     hasOverlayPermission: Boolean,
+    hasNotificationPermission: Boolean,
     isOverlayActive: Boolean,
     brightness: Float,
     isShizukuAvailable: Boolean,
     onRequestPermission: () -> Unit,
+    onRequestNotificationPermission: () -> Unit,
     onGrantPermissionViaShizuku: () -> Unit,
     onToggleOverlay: () -> Unit,
     onBrightnessChange: (Float) -> Unit,
@@ -228,6 +236,20 @@ private fun MainScreen(
                 modifier = Modifier.padding(top = 24.dp),
             ) {
                 Text("設定")
+            }
+        }
+
+        if (!hasNotificationPermission) {
+            Text(
+                text = "通知権限がありません",
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(top = 24.dp),
+            )
+            Button(
+                onClick = onRequestNotificationPermission,
+                modifier = Modifier.padding(top = 8.dp),
+            ) {
+                Text("通知を許可する")
             }
         }
     }
