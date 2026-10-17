@@ -2,8 +2,8 @@
 
 ## 現在のステータス
 
-- フェーズ: フェーズ 4 (設定 UI)
-- 次のタスク: 設定永続化 + 設定画面 + メイン画面改修
+- フェーズ: フェーズ 4 完了 → フェーズ 5 (統合・仕上げ) へ
+- 次のタスク: 起動時自動有効化
 - 備考: ビルド確認未実施
 
 ## 完了済み
@@ -17,8 +17,10 @@
 - オーバーレイ設計 (docs/design-overlay.md)
 - 権限要求フロー (SYSTEM_ALERT_WINDOW)
 - OverlayService: オーバーレイ描画 + 明度制御 + フォアグラウンドサービス
-- MainActivity: オン/オフトグル + 明度スライダー
+- MainActivity: オン/オフトグル + 明度スライダー + 設定ボタン
 - 通知設計 (docs/design-notification.md)
 - pinned 通知: OFF/暗く/明るくアクション + タップでアプリ + 明度%表示
 - オフ時通知制御: always/dismiss_0s/dismiss_10s 切り替え + ON アクション付き停止中通知
 - 設定 UI 設計 (docs/design-settings.md)
+- SettingsActivity: 起動時自動有効化 Switch + オフ時通知ラジオグループ
+- 設定永続化: SharedPreferences

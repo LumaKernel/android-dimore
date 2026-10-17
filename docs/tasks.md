@@ -32,9 +32,9 @@
 依存: フェーズ 2, 3 の設計完了
 
 - [x] [設計] 設定 UI 設計: docs/design-settings.md に記載。SharedPreferences、SettingsActivity 別画面
-- [ ] [ロジック] 設定永続化: 起動時有効化フラグ、オフ時通知挙動
-- [ ] [UI] 設定画面: 起動時自動有効化オプション、オフ時通知挙動選択 (常に表示 / 一定時間後非表示、非表示時間 0秒 or 10秒)
-- [ ] [UI] メイン画面: オン/オフトグル、明度スライダー
+- [x] [ロジック] 設定永続化: SharedPreferences で auto_enable_on_launch (Boolean), off_notification_mode (String)
+- [x] [UI] 設定画面: SettingsActivity。起動時自動有効化 Switch、オフ時通知ラジオグループ (常に表示/即時非表示/10秒後非表示)
+- [x] [UI] メイン画面: 設定ボタン追加。オン/オフトグル・明度スライダーは既存
 
 ## フェーズ 5: 統合・仕上げ
 

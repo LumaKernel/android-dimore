@@ -50,6 +50,7 @@ class MainActivity : ComponentActivity() {
                         onRequestPermission = ::requestOverlayPermission,
                         onToggleOverlay = ::toggleOverlay,
                         onBrightnessChange = ::updateBrightness,
+                        onOpenSettings = ::openSettings,
                     )
                 }
             }
@@ -84,6 +85,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun openSettings() {
+        startActivity(Intent(this, SettingsActivity::class.java))
+    }
+
     private fun updateBrightness(value: Float) {
         brightness.floatValue = value
         if (overlayActive.value) {
@@ -103,6 +108,7 @@ private fun MainScreen(
     onRequestPermission: () -> Unit,
     onToggleOverlay: () -> Unit,
     onBrightnessChange: (Float) -> Unit,
+    onOpenSettings: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -147,6 +153,13 @@ private fun MainScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
             )
+
+            Button(
+                onClick = onOpenSettings,
+                modifier = Modifier.padding(top = 24.dp),
+            ) {
+                Text("設定")
+            }
         }
     }
 }
