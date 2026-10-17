@@ -23,38 +23,23 @@
 
 ## インストール
 
-Enhanced Confirmation Mode を回避するため、信頼されたインストーラー (shell uid) 経由でインストールする必要があります。
-
-### 方法 1: adb install (PC 必要)
+### 方法 1: adb install (推奨)
 
 ```sh
 adb install dimore.apk
 ```
 
-### 方法 2: Shizuku + rish (PC 不要)
+信頼されたインストーラー経由のため、権限が制限されません。
 
-[Shizuku](https://shizuku.rikka.app/) をセットアップ済みなら rish 経由でインストールできます。
+### 方法 2: 通常の APK インストール + 権限調整
 
-```sh
-rish -c "pm install /path/to/dimore.apk"
-```
+APK を直接タップしてインストールできますが、Android 15+ の Enhanced Confirmation Mode によりオーバーレイ権限が制限されます。インストール後、以下のいずれかで権限を有効化してください。
 
-### APK タップでインストール済みの場合
-
-一度アンインストールしてから上記いずれかの方法で再インストールしてください。
-
-```sh
-adb uninstall com.lumakernel.dimore
-adb install dimore.apk
-```
-
-### 権限だけ手動で付与する (Shizuku)
-
-APK タップでインストール済みでも、権限だけ後から付与できます。
-
-```sh
-rish -c "appops set com.lumakernel.dimore SYSTEM_ALERT_WINDOW allow"
-```
+- **アプリ内から** — [Shizuku](https://shizuku.rikka.app/) がセットアップ済みなら、アプリ内の「Shizuku で権限を付与」ボタンから直接有効化できます
+- **adb で手動付与** —
+  ```sh
+  adb shell appops set com.lumakernel.dimore SYSTEM_ALERT_WINDOW allow
+  ```
 
 ## 使い方
 
