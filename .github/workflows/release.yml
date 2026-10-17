@@ -25,6 +25,16 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      - name: Verify tag matches version.txt
+        run: |
+          VERSION=$(cat version.txt | tr -d '[:space:]')
+          EXPECTED_TAG="v${VERSION}.0.0"
+          ACTUAL_TAG="${GITHUB_REF_NAME}"
+          if [ "$EXPECTED_TAG" != "$ACTUAL_TAG" ]; then
+            echo "::error::Tag mismatch: tag is ${ACTUAL_TAG} but version.txt says ${EXPECTED_TAG}"
+            exit 1
+          fi
+
       - name: Decode keystore
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > /tmp/release.keystore
 

@@ -32,3 +32,5 @@
 - tag push (`v{n}.0.0`) で GitHub Actions が自動リリースする
 - リリース手順: version.txt を +1 してコミット → `git tag v{n}.0.0` → `git push --tags`
 - 署名用 keystore は GitHub Secrets に格納 (KEYSTORE_BASE64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD)
+- CD ワークフローはタグと version.txt の整合性を検証する (不一致時はビルド失敗)
+- version.txt を変更したコミットを push したら、タグ push してリリースするかユーザーに確認する

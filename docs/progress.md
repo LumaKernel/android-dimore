@@ -78,3 +78,6 @@
 - CI 修正: android-actions/setup-android の 'tools' パッケージ廃止対応、setup-java v5 に更新
 - バグ修正: painterResource → AndroidView + ImageView (AdaptiveIconDrawable クラッシュ修正)
 - CI green 確認済み、push 完了
+- 署名 keystore 生成 + GitHub Secrets 4 件設定
+- CD ワークフローにタグ/version.txt 整合性チェック追加
+- CLAUDE.md 更新: version.txt 変更時にリリース確認ルール追加

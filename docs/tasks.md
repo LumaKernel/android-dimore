@@ -153,6 +153,14 @@
 - [x] [バグ修正] CI: android-actions/setup-android の 'tools' パッケージ廃止対応。packages を platform-tools のみに変更。actions/setup-java を v5 に更新
 - [x] [バグ修正] アプリ起動クラッシュ: painterResource が AdaptiveIconDrawable を処理できない。AndroidView + ImageView に変更
 
+## フェーズ 19: リリース基盤
+
+- [x] [ロジック] 署名 keystore 生成 + GitHub Secrets 設定 (KEYSTORE_BASE64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD)
+- [x] [ロジック] CD ワークフローにタグ/version.txt 整合性チェック追加
+- [x] [メタ] CLAUDE.md 更新: version.txt 変更時にリリースするか確認するルール追加
+- [ ] [ロジック] 初回リリース: v27.0.0 タグ push → GitHub Release + 署名済み APK
+- [ ] [QA] リリースワークフロー動作確認
+
 ## 判断が必要な事項
 
 - ~~minSdk をどこに設定するか~~ → API 36 のみ (Android 16 専用) に決定
