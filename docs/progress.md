@@ -3,7 +3,7 @@
 ## 現在のステータス
 
 - フェーズ: フェーズ 14 (Shizuku UI 常時表示)
-- 残タスク: Shizuku UI QA (Phase 14), 権限管理QA (Phase 8), CI/CD QA (Phase 9), 権限UI QA (Phase 11) — いずれもQAのみ
+- 残タスク: アプリ情報UI (Phase 15), Shizuku UI QA (Phase 14), 権限管理QA (Phase 8), CI/CD QA (Phase 9), 権限UI QA (Phase 11)
 - ブロッカー: 12コミット以上が未push。push すれば CI/CD QA を開始できる
 - フェーズ 8 残: 権限管理 QA (実機確認待ち)
 - ビルド: 成功確認済み
@@ -56,3 +56,4 @@
 - UNLICENSE ファイル作成 + README ライセンスセクション更新
 - spec.md Shizuku UI 方針変更: 未インストール/未起動時も UI を表示する (隠さない)
 - Shizuku 未インストール/未起動時: 「Shizuku を導入すると PC なしで権限を付与できます」案内テキスト表示
+- spec.md アプリ情報セクション追加: メイン画面にアプリ名+バージョン、About にビルド情報/ライセンス/リポURL

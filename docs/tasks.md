@@ -111,6 +111,17 @@
 - [x] [ロジック] Shizuku 未インストール/未起動時の UI: Shizuku の説明と導入案内を表示 (現状は非表示)
 - [ ] [QA] Shizuku UI 表示確認: 未インストール/未起動/起動済み各状態での表示
 
+## フェーズ 15: アプリ情報 UI
+
+依存: なし
+
+- [x] [設計] spec.md 更新: メイン画面にアプリ名+バージョン表示、アプリ情報 (About) セクション追加
+- [ ] [ロジック] メイン画面にバージョン表示: BuildConfig.VERSION_NAME を使ってアプリ名の下にバージョンを表示
+- [ ] [ロジック] BuildConfig にリポジトリ URL 埋め込み: build.gradle.kts で GITHUB_REPOSITORY 環境変数から buildConfigField 追加、デフォルト値あり
+- [ ] [ロジック] CI/CD workflow 更新: assembleRelease/assembleDebug に GITHUB_REPOSITORY 環境変数を渡す
+- [ ] [UI] About 画面 / セクション: ビルド情報、ライセンス、利用ライブラリライセンス一覧、リポジトリ URL を表示
+- [ ] [QA] アプリ情報表示確認
+
 ## 判断が必要な事項
 
 - ~~minSdk をどこに設定するか~~ → API 36 のみ (Android 16 専用) に決定
