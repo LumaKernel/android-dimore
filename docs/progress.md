@@ -12,7 +12,7 @@
   - Phase 11: 権限 UI QA (実機確認待ち)
   - Phase 14: Shizuku UI QA (実機確認待ち)
   - Phase 15: アプリ情報 QA (実機確認待ち)
-- ブロッカー: 20コミット以上が未push。push すれば CI/CD QA を開始できる
+- ブロッカー: なし (push 済み、CI green)
 - ビルド: 成功確認済み
 
 ## 完了済み
@@ -75,3 +75,6 @@
 - OverlayService 状態共有: overlay_active/brightness を SharedPreferences (dimore_overlay_state) に書き出し
 - TileService 6 クラス実装: tile/ パッケージに OpenApp/OverlayOn/OverlayOff/OverlayToggle/BrightnessUp/BrightnessDown
 - AndroidManifest.xml: 6 タイルの service 宣言 + BIND_QUICK_SETTINGS_TILE + ラベル文字列リソース
+- CI 修正: android-actions/setup-android の 'tools' パッケージ廃止対応、setup-java v5 に更新
+- バグ修正: painterResource → AndroidView + ImageView (AdaptiveIconDrawable クラッシュ修正)
+- CI green 確認済み、push 完了

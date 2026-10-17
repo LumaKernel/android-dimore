@@ -148,6 +148,11 @@
 - [x] [ロジック] AndroidManifest.xml: 6 つの TileService の <service> 宣言 + ACTION_QS_TILE intent-filter + アイコン・ラベル
 - [ ] [QA] Quick Settings タイル動作確認: 各タイルの追加・操作・状態反映
 
+## バグ修正 (フェーズ外)
+
+- [x] [バグ修正] CI: android-actions/setup-android の 'tools' パッケージ廃止対応。packages を platform-tools のみに変更。actions/setup-java を v5 に更新
+- [x] [バグ修正] アプリ起動クラッシュ: painterResource が AdaptiveIconDrawable を処理できない。AndroidView + ImageView に変更
+
 ## 判断が必要な事項
 
 - ~~minSdk をどこに設定するか~~ → API 36 のみ (Android 16 専用) に決定
