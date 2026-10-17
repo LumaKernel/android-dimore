@@ -4,7 +4,6 @@ import moe.shizuku.server.IShizukuService
 import rikka.shizuku.Shizuku
 
 object ShizukuHelper {
-
     fun isShizukuAvailable(): Boolean =
         try {
             Shizuku.pingBinder()
@@ -23,11 +22,12 @@ object ShizukuHelper {
         try {
             val binder = Shizuku.getBinder()
             val service = IShizukuService.Stub.asInterface(binder)
-            val remoteProcess = service.newProcess(
-                arrayOf("appops", "set", packageName, "SYSTEM_ALERT_WINDOW", "allow"),
-                null,
-                null,
-            )
+            val remoteProcess =
+                service.newProcess(
+                    arrayOf("appops", "set", packageName, "SYSTEM_ALERT_WINDOW", "allow"),
+                    null,
+                    null,
+                )
             remoteProcess.waitFor() == 0
         } catch (_: Exception) {
             false

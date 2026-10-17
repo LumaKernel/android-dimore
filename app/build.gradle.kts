@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 val appVersion = file("${rootProject.projectDir}/version.txt").readText().trim().toInt()
@@ -15,7 +16,7 @@ android {
         minSdk = 36
         targetSdk = 36
         versionCode = appVersion
-        versionName = "v${appVersion}.0.0"
+        versionName = "v$appVersion.0.0"
     }
 
     buildTypes {

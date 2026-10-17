@@ -16,7 +16,6 @@ import android.view.View
 import android.view.WindowManager
 
 class OverlayService : Service() {
-
     companion object {
         const val ACTION_START = "com.lumakernel.dimore.ACTION_START"
         const val ACTION_STOP = "com.lumakernel.dimore.ACTION_STOP"
@@ -37,11 +36,12 @@ class OverlayService : Service() {
     private var overlayView: View? = null
     private var currentBrightness: Float = DEFAULT_BRIGHTNESS
     private val handler = Handler(Looper.getMainLooper())
-    private val dismissNotificationRunnable = Runnable {
-        val manager = getSystemService(NotificationManager::class.java)
-        manager.cancel(INACTIVE_NOTIFICATION_ID)
-        stopSelf()
-    }
+    private val dismissNotificationRunnable =
+        Runnable {
+            val manager = getSystemService(NotificationManager::class.java)
+            manager.cancel(INACTIVE_NOTIFICATION_ID)
+            stopSelf()
+        }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -50,7 +50,11 @@ class OverlayService : Service() {
         createNotificationChannel()
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onStartCommand(
+        intent: Intent?,
+        flags: Int,
+        startId: Int,
+    ): Int {
         when (intent?.action) {
             ACTION_START -> {
                 handler.removeCallbacks(dismissNotificationRunnable)
@@ -97,15 +101,16 @@ class OverlayService : Service() {
 
         val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
 
-        val params = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-                or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
-            PixelFormat.TRANSLUCENT,
-        )
+        val params =
+            WindowManager.LayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                    or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+                PixelFormat.TRANSLUCENT,
+            )
         params.gravity = Gravity.TOP or Gravity.START
 
         val view = View(this)
@@ -164,49 +169,54 @@ class OverlayService : Service() {
     }
 
     private fun createNotificationChannel() {
-        val channel = NotificationChannel(
-            CHANNEL_ID,
-            "dimore オーバーレイ",
-            NotificationManager.IMPORTANCE_LOW,
-        )
+        val channel =
+            NotificationChannel(
+                CHANNEL_ID,
+                "dimore オーバーレイ",
+                NotificationManager.IMPORTANCE_LOW,
+            )
         val manager = getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(channel)
     }
 
     private fun buildActiveNotification(brightness: Float): Notification {
-        val contentIntent = PendingIntent.getActivity(
-            this,
-            0,
-            Intent(this, MainActivity::class.java),
-            PendingIntent.FLAG_IMMUTABLE,
-        )
+        val contentIntent =
+            PendingIntent.getActivity(
+                this,
+                0,
+                Intent(this, MainActivity::class.java),
+                PendingIntent.FLAG_IMMUTABLE,
+            )
 
-        val stopIntent = PendingIntent.getService(
-            this,
-            1,
-            Intent(this, OverlayService::class.java).apply { action = ACTION_STOP },
-            PendingIntent.FLAG_IMMUTABLE,
-        )
+        val stopIntent =
+            PendingIntent.getService(
+                this,
+                1,
+                Intent(this, OverlayService::class.java).apply { action = ACTION_STOP },
+                PendingIntent.FLAG_IMMUTABLE,
+            )
 
-        val brightnessUpIntent = PendingIntent.getService(
-            this,
-            2,
-            Intent(this, OverlayService::class.java).apply { action = ACTION_BRIGHTNESS_UP },
-            PendingIntent.FLAG_IMMUTABLE,
-        )
+        val brightnessUpIntent =
+            PendingIntent.getService(
+                this,
+                2,
+                Intent(this, OverlayService::class.java).apply { action = ACTION_BRIGHTNESS_UP },
+                PendingIntent.FLAG_IMMUTABLE,
+            )
 
-        val brightnessDownIntent = PendingIntent.getService(
-            this,
-            3,
-            Intent(this, OverlayService::class.java).apply { action = ACTION_BRIGHTNESS_DOWN },
-            PendingIntent.FLAG_IMMUTABLE,
-        )
+        val brightnessDownIntent =
+            PendingIntent.getService(
+                this,
+                3,
+                Intent(this, OverlayService::class.java).apply { action = ACTION_BRIGHTNESS_DOWN },
+                PendingIntent.FLAG_IMMUTABLE,
+            )
 
         val brightnessPercent = (brightness * 100).toInt()
 
         return Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("dimore")
-            .setContentText("明度: ${brightnessPercent}%")
+            .setContentText("明度: $brightnessPercent%")
             .setSmallIcon(R.drawable.ic_notification)
             .setOngoing(true)
             .setContentIntent(contentIntent)
@@ -217,22 +227,24 @@ class OverlayService : Service() {
     }
 
     private fun buildInactiveNotification(): Notification {
-        val startIntent = PendingIntent.getService(
-            this,
-            4,
-            Intent(this, OverlayService::class.java).apply {
-                action = ACTION_START
-                putExtra(EXTRA_BRIGHTNESS, currentBrightness)
-            },
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-        )
+        val startIntent =
+            PendingIntent.getService(
+                this,
+                4,
+                Intent(this, OverlayService::class.java).apply {
+                    action = ACTION_START
+                    putExtra(EXTRA_BRIGHTNESS, currentBrightness)
+                },
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+            )
 
-        val contentIntent = PendingIntent.getActivity(
-            this,
-            0,
-            Intent(this, MainActivity::class.java),
-            PendingIntent.FLAG_IMMUTABLE,
-        )
+        val contentIntent =
+            PendingIntent.getActivity(
+                this,
+                0,
+                Intent(this, MainActivity::class.java),
+                PendingIntent.FLAG_IMMUTABLE,
+            )
 
         return Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("dimore")

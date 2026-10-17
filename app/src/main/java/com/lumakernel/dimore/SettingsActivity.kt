@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 class SettingsActivity : ComponentActivity() {
-
     private val autoEnableOnLaunch = mutableStateOf(false)
     private val offNotificationMode = mutableStateOf("always")
 
@@ -55,14 +54,20 @@ class SettingsActivity : ComponentActivity() {
         offNotificationMode.value = prefs.getString("off_notification_mode", "always") ?: "always"
     }
 
-    private fun saveSetting(key: String, value: Boolean) {
+    private fun saveSetting(
+        key: String,
+        value: Boolean,
+    ) {
         getSharedPreferences("dimore_settings", Context.MODE_PRIVATE)
             .edit()
             .putBoolean(key, value)
             .apply()
     }
 
-    private fun saveSetting(key: String, value: String) {
+    private fun saveSetting(
+        key: String,
+        value: String,
+    ) {
         getSharedPreferences("dimore_settings", Context.MODE_PRIVATE)
             .edit()
             .putString(key, value)
@@ -78,9 +83,10 @@ private fun SettingsScreen(
     onOffNotificationModeChange: (String) -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
     ) {
         Text(
             text = "設定",
@@ -89,9 +95,10 @@ private fun SettingsScreen(
         )
 
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
@@ -135,9 +142,10 @@ private fun NotificationModeOption(
     onClick: () -> Unit,
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         RadioButton(

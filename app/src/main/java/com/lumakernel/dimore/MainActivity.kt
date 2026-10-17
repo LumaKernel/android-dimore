@@ -9,7 +9,6 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,26 +25,28 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 
 class MainActivity : ComponentActivity() {
-
     private val overlayPermissionGranted = mutableStateOf(false)
     private val notificationPermissionGranted = mutableStateOf(false)
     private val shizukuAvailable = mutableStateOf(false)
     private val overlayActive = mutableStateOf(false)
     private val brightness = mutableFloatStateOf(OverlayService.DEFAULT_BRIGHTNESS)
 
-    private val overlayPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        overlayPermissionGranted.value = Settings.canDrawOverlays(this)
-    }
+    private val overlayPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+        ) {
+            overlayPermissionGranted.value = Settings.canDrawOverlays(this)
+        }
 
-    private val notificationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { granted ->
-        notificationPermissionGranted.value = granted
-    }
+    private val notificationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission(),
+        ) { granted ->
+            notificationPermissionGranted.value = granted
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,10 +96,11 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun requestOverlayPermission() {
-        val intent = Intent(
-            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-            Uri.parse("package:$packageName"),
-        )
+        val intent =
+            Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName"),
+            )
         overlayPermissionLauncher.launch(intent)
     }
 
@@ -168,9 +170,10 @@ private fun MainScreen(
     onOpenSettings: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -214,9 +217,10 @@ private fun MainScreen(
                 value = brightness,
                 onValueChange = onBrightnessChange,
                 valueRange = 0.0f..OverlayService.MAX_BRIGHTNESS,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
             )
 
             Button(
