@@ -22,22 +22,14 @@ android {
 
         val repoUrl =
             System.getenv("GITHUB_REPOSITORY")?.let { "https://github.com/$it" }
-                ?: try {
-                    val process =
+                ?: run {
+                    val raw =
                         ProcessBuilder("git", "remote", "get-url", "origin")
                             .directory(rootProject.projectDir)
-                            .redirectErrorStream(true)
                             .start()
-                    val raw = process.inputStream.bufferedReader().readText().trim()
+                            .inputStream.bufferedReader().readText().trim()
                     val parsed = URI(raw.replace(Regex("^([^@]+)@([^:]+):"), "$1://$2/"))
-                    URI(
-                        "https",
-                        parsed.host,
-                        parsed.path.removeSuffix(".git"),
-                        null,
-                    ).toString()
-                } catch (_: Exception) {
-                    ""
+                    URI("https", parsed.host, parsed.path.removeSuffix(".git"), null).toString()
                 }
         buildConfigField("String", "REPOSITORY_URL", "\"$repoUrl\"")
     }

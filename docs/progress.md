@@ -58,4 +58,5 @@
 - Shizuku 未インストール/未起動時: 「Shizuku を導入すると PC なしで権限を付与できます」案内テキスト表示
 - spec.md アプリ情報セクション追加: メイン画面にアプリ名+バージョン、About にビルド情報/ライセンス/リポURL
 - メイン画面にバージョン表示: BuildConfig 有効化、アプリ名直下に VERSION_NAME 表示
-- BuildConfig に REPOSITORY_URL 埋め込み: GITHUB_REPOSITORY 環境変数から生成、デフォルト LumaKernel/android-dimore
+- BuildConfig に REPOSITORY_URL 埋め込み: GITHUB_REPOSITORY 環境変数 or git remote から生成 (不正ならビルドエラー)
+- About セクション: 設定画面下部にバージョン、ライセンス、リポジトリ URL (クリッカブル) を表示

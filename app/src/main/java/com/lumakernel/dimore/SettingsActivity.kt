@@ -1,14 +1,21 @@
 package com.lumakernel.dimore
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
@@ -18,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 
 class SettingsActivity : ComponentActivity() {
@@ -41,6 +49,9 @@ class SettingsActivity : ComponentActivity() {
                         onOffNotificationModeChange = { mode ->
                             offNotificationMode.value = mode
                             saveSetting("off_notification_mode", mode)
+                        },
+                        onOpenUrl = { url ->
+                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                         },
                     )
                 }
@@ -81,12 +92,14 @@ private fun SettingsScreen(
     onAutoEnableChange: (Boolean) -> Unit,
     offNotificationMode: String,
     onOffNotificationModeChange: (String) -> Unit,
+    onOpenUrl: (String) -> Unit,
 ) {
     Column(
         modifier =
             Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
     ) {
         Text(
             text = "設定",
@@ -131,6 +144,57 @@ private fun SettingsScreen(
             label = "10秒後に非表示",
             selected = offNotificationMode == "dismiss_10s",
             onClick = { onOffNotificationModeChange("dismiss_10s") },
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
+
+        Text(
+            text = "アプリ情報",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(bottom = 8.dp),
+        )
+
+        AboutItem(label = "バージョン", value = BuildConfig.VERSION_NAME)
+
+        AboutItem(label = "ライセンス", value = "UNLICENSE (パブリックドメイン)")
+
+        if (BuildConfig.REPOSITORY_URL.isNotEmpty()) {
+            Text(
+                text = "リポジトリ",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 8.dp),
+            )
+            Text(
+                text = BuildConfig.REPOSITORY_URL,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary,
+                textDecoration = TextDecoration.Underline,
+                modifier =
+                    Modifier
+                        .clickable { onOpenUrl(BuildConfig.REPOSITORY_URL) }
+                        .padding(vertical = 4.dp),
+            )
+        }
+    }
+}
+
+@Composable
+private fun AboutItem(
+    label: String,
+    value: String,
+) {
+    Column(modifier = Modifier.padding(vertical = 4.dp)) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Text(
+            text = value,
+            style = MaterialTheme.typography.bodyMedium,
         )
     }
 }

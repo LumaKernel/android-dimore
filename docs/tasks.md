@@ -119,7 +119,7 @@
 - [x] [ロジック] メイン画面にバージョン表示: BuildConfig.VERSION_NAME を使ってアプリ名の下にバージョンを表示
 - [x] [ロジック] BuildConfig にリポジトリ URL 埋め込み: build.gradle.kts で GITHUB_REPOSITORY 環境変数から buildConfigField 追加、デフォルト値あり
 - [x] [ロジック] CI/CD workflow 更新: GITHUB_REPOSITORY は GitHub Actions 組み込み変数のため変更不要
-- [ ] [UI] About 画面 / セクション: ビルド情報、ライセンス、利用ライブラリライセンス一覧、リポジトリ URL を表示
+- [x] [UI] About 画面 / セクション: ビルド情報、ライセンス、リポジトリ URL を設定画面下部に表示 (利用ライブラリライセンス一覧は別途)
 - [ ] [QA] アプリ情報表示確認
 
 ## 判断が必要な事項
