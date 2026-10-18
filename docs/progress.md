@@ -97,3 +97,4 @@
 - Phase 22a: OverlayService に ACTION_SHOW_INACTIVE 追加、BootReceiver を通知表示のみに修正
 - Phase 22a: SettingsActivity ラベル・警告ヒント文言修正
 - Phase 22a: design-settings.md + README 更新 (サービス自動起動、通知表示のみ)
+- Phase 23 開始: spec.md にトグルボタン色分け・アイコン仕様、設定画面 Material Icons 活用を追加
