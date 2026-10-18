@@ -92,3 +92,4 @@
 - Phase 22: MainActivity の autoEnableIfConfigured() 削除 (アプリ起動時自動有効化を除去)
 - Phase 22: SettingsActivity UI 変更 (ラベル・キー: auto_enable_on_launch → auto_enable_on_boot、警告ヒント追加)
 - Phase 22: design-settings.md 更新
+- Phase 22: README 設定テーブル更新
