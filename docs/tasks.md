@@ -177,17 +177,35 @@
 - [x] [ロジック] release.yml 更新: APK パスを glob (dimore-*.apk) に変更
 - [ ] [QA] リリースで正しいファイル名の APK がアップロードされること
 
-## フェーズ 22: 自動有効化の仕様変更 (アプリ起動時 → 端末起動時)
+## フェーズ 22: 自動起動の仕様変更 (アプリ起動時 → 端末起動時)
 
 依存: なし
 
-- [x] [ロジック] BootReceiver 追加: BOOT_COMPLETED を受信して OverlayService を起動する BroadcastReceiver を実装。SharedPreferences から auto_enable_on_boot (Boolean) を読み、true かつオーバーレイ権限ありなら起動
-- [x] [ロジック] AndroidManifest.xml: RECEIVE_BOOT_COMPLETED 権限追加 + BootReceiver の receiver 宣言 (exported=true, BOOT_COMPLETED intent-filter)
+- [x] [ロジック] BootReceiver 追加: BOOT_COMPLETED を受信して OverlayService を起動する BroadcastReceiver
+- [x] [ロジック] AndroidManifest.xml: RECEIVE_BOOT_COMPLETED 権限追加 + BootReceiver の receiver 宣言
 - [x] [ロジック] MainActivity の autoEnableIfConfigured() を削除: アプリ起動時の自動有効化ロジックを除去
-- [x] [UI] SettingsActivity: ラベル変更 (「起動時に自動でオンにする」→「端末起動時に自動でオンにする」)、SharedPreferences キー変更 (auto_enable_on_launch → auto_enable_on_boot)、オフ時通知が「常に表示」以外の場合に警告ヒント表示
-- [x] [メタ] docs/design-settings.md 更新: auto_enable_on_launch → auto_enable_on_boot、説明文変更
-- [x] [メタ] README 更新: 設定テーブルの「起動時自動有効化」→「端末起動時自動有効化」に変更
-- [ ] [QA] 端末起動時自動有効化の動作確認: 端末再起動後にオーバーレイが自動起動すること、警告ヒント表示
+- [x] [UI] SettingsActivity: ラベル・キー変更 + 警告ヒント (Phase 22a で修正予定)
+- [x] [メタ] docs/design-settings.md 更新
+- [x] [メタ] README 更新
+
+### Phase 22a: Boot 自動起動の仕様修正 (通知表示のみ、オーバーレイ ON にしない)
+
+- [ ] [設計] spec.md 更新済み (オーバーレイ ON → サービス起動+オフ通知表示のみ)
+- [ ] [ロジック] OverlayService に ACTION_SHOW_INACTIVE 追加: オフ状態通知を表示するだけのアクション (フォアグラウンドサービス起動不要、通知表示+stopSelf)
+- [ ] [ロジック] BootReceiver 修正: ACTION_START → ACTION_SHOW_INACTIVE に変更
+- [ ] [UI] SettingsActivity ラベル修正: 「端末起動時に自動でオンにする」→「端末起動時にサービスを自動起動」、警告ヒント文言も修正 (通知がすぐ消えるため自動起動の意味がない)
+- [ ] [メタ] docs/design-settings.md 更新: 説明文修正
+- [ ] [メタ] README 更新: 設定テーブルの説明修正
+- [ ] [QA] 端末起動時に通知だけ表示されオーバーレイは OFF のままであること
+
+## フェーズ 23: メイン画面・設定画面の UI 改善
+
+依存: なし
+
+- [ ] [設計] spec.md 更新: トグルボタンの見た目仕様 (色分け・アイコン付き)、設定画面のアイコン活用
+- [ ] [UI] メイン画面トグルボタン改善: ON 時 (停止する) と OFF 時 (暗くする) で色・アイコンを変えて視覚的に区別。例: ON=赤系+停止アイコン、OFF=青系+暗転アイコン
+- [ ] [UI] 設定画面アイコン追加: 各設定項目にアイコンを付与 (Material Icons)。自動起動=端末アイコン、通知=通知アイコン等
+- [ ] [QA] ボタン・設定画面の見た目確認
 
 ## 判断が必要な事項
 
