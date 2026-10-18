@@ -99,3 +99,4 @@
 - Phase 22a: design-settings.md + README 更新 (サービス自動起動、通知表示のみ)
 - Phase 23 開始: spec.md にトグルボタン色分け・アイコン仕様、設定画面 Material Icons 活用を追加
 - Phase 23: トグルボタン改善 (ON=error+Stop, OFF=primary+DarkMode)、material-icons-extended 依存追加
+- Phase 23: 設定画面アイコン追加 (自動起動=PhoneAndroid, 通知=Notifications)
