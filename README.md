@@ -5,7 +5,7 @@
 <h1 align="center">dimore</h1>
 
 <p align="center">
-  画面をもっと暗く。ソフトウェアオーバーレイで限界を超えた暗さを実現する Android アプリ。
+  半透明の黒いオーバーレイを画面に重ねて、端末の最低輝度より暗くする Android アプリ。
 </p>
 
 <p align="center">
