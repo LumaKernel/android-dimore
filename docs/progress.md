@@ -3,7 +3,7 @@
 ## 現在のステータス
 
 - フェーズ: 全実装完了、QA 待ち
-- リリース: v28.0.0 リリース完了 (GitHub Release + 署名済み APK dimore-v28.0.0.apk)
+- リリース: v29.0.0 リリース完了 (GitHub Release + 署名済み APK dimore-v29.0.0.apk)
 - 残タスク (すべて QA = 実機確認待ち):
   - Phase 20: QS 長押し動作
   - Phase 21: APK ファイル名
@@ -93,3 +93,4 @@
 - Phase 22: SettingsActivity UI 変更 (ラベル・キー: auto_enable_on_launch → auto_enable_on_boot、警告ヒント追加)
 - Phase 22: design-settings.md 更新
 - Phase 22: README 設定テーブル更新
+- v29.0.0 リリース完了: Phase 22 (端末起動時自動有効化) を含むリリース
