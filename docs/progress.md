@@ -90,3 +90,4 @@
 - v28.0.0 リリース完了: CD ワークフロー成功、dimore-v28.0.0.apk を GitHub Release にアップロード
 - Phase 22 開始: BootReceiver 追加 (BOOT_COMPLETED で自動起動) + AndroidManifest 更新
 - Phase 22: MainActivity の autoEnableIfConfigured() 削除 (アプリ起動時自動有効化を除去)
+- Phase 22: SettingsActivity UI 変更 (ラベル・キー: auto_enable_on_launch → auto_enable_on_boot、警告ヒント追加)

@@ -29,7 +29,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 
 class SettingsActivity : ComponentActivity() {
-    private val autoEnableOnLaunch = mutableStateOf(false)
+    private val autoEnableOnBoot = mutableStateOf(false)
     private val offNotificationMode = mutableStateOf("always")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +40,10 @@ class SettingsActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     SettingsScreen(
-                        autoEnableOnLaunch = autoEnableOnLaunch.value,
+                        autoEnableOnBoot = autoEnableOnBoot.value,
                         onAutoEnableChange = { value ->
-                            autoEnableOnLaunch.value = value
-                            saveSetting("auto_enable_on_launch", value)
+                            autoEnableOnBoot.value = value
+                            saveSetting("auto_enable_on_boot", value)
                         },
                         offNotificationMode = offNotificationMode.value,
                         onOffNotificationModeChange = { mode ->
@@ -64,7 +64,7 @@ class SettingsActivity : ComponentActivity() {
 
     private fun loadSettings() {
         val prefs = getSharedPreferences("dimore_settings", Context.MODE_PRIVATE)
-        autoEnableOnLaunch.value = prefs.getBoolean("auto_enable_on_launch", false)
+        autoEnableOnBoot.value = prefs.getBoolean("auto_enable_on_boot", false)
         offNotificationMode.value = prefs.getString("off_notification_mode", "always") ?: "always"
     }
 
@@ -91,7 +91,7 @@ class SettingsActivity : ComponentActivity() {
 
 @Composable
 private fun SettingsScreen(
-    autoEnableOnLaunch: Boolean,
+    autoEnableOnBoot: Boolean,
     onAutoEnableChange: (Boolean) -> Unit,
     offNotificationMode: String,
     onOffNotificationModeChange: (String) -> Unit,
@@ -119,12 +119,21 @@ private fun SettingsScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "起動時に自動でオンにする",
+                text = "端末起動時に自動でオンにする",
                 modifier = Modifier.weight(1f),
             )
             Switch(
-                checked = autoEnableOnLaunch,
+                checked = autoEnableOnBoot,
                 onCheckedChange = onAutoEnableChange,
+            )
+        }
+
+        if (autoEnableOnBoot && offNotificationMode != "always") {
+            Text(
+                text = "オフ時の通知が非表示設定のため、オーバーレイ起動後に通知から操作できない場合があります",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(start = 4.dp, bottom = 8.dp),
             )
         }
 
