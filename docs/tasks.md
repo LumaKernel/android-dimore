@@ -185,7 +185,7 @@
 - [x] [ロジック] AndroidManifest.xml: RECEIVE_BOOT_COMPLETED 権限追加 + BootReceiver の receiver 宣言 (exported=true, BOOT_COMPLETED intent-filter)
 - [x] [ロジック] MainActivity の autoEnableIfConfigured() を削除: アプリ起動時の自動有効化ロジックを除去
 - [x] [UI] SettingsActivity: ラベル変更 (「起動時に自動でオンにする」→「端末起動時に自動でオンにする」)、SharedPreferences キー変更 (auto_enable_on_launch → auto_enable_on_boot)、オフ時通知が「常に表示」以外の場合に警告ヒント表示
-- [ ] [メタ] docs/design-settings.md 更新: auto_enable_on_launch → auto_enable_on_boot、説明文変更
+- [x] [メタ] docs/design-settings.md 更新: auto_enable_on_launch → auto_enable_on_boot、説明文変更
 - [ ] [メタ] README 更新: 設定テーブルの「起動時自動有効化」→「端末起動時自動有効化」に変更
 - [ ] [QA] 端末起動時自動有効化の動作確認: 端末再起動後にオーバーレイが自動起動すること、警告ヒント表示
 
