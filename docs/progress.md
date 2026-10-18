@@ -2,19 +2,20 @@
 
 ## 現在のステータス
 
-- フェーズ: Phase 20, 21 実装完了
-- 残タスク:
-  - Phase 20: QS 長押し動作 — QA 待ち
-  - Phase 21: APK ファイル名改善 — QA 待ち
-  - Phase 18: Quick Settings タイル — QA 待ち
-  - Phase 16: UI トップにアイコン表示 — QA 待ち
-  - Phase 17: ON/OFF ラベル改善 — QA 待ち
-  - Phase 8: 権限管理 QA (実機確認待ち)
-  - Phase 9: CI/CD QA (push 後に確認)
-  - Phase 11: 権限 UI QA (実機確認待ち)
-  - Phase 14: Shizuku UI QA (実機確認待ち)
-  - Phase 15: アプリ情報 QA (実機確認待ち)
-- ブロッカー: なし (push 済み、CI green)
+- フェーズ: 全実装完了、QA 待ち
+- リリース: v28.0.0 リリース完了 (GitHub Release + 署名済み APK dimore-v28.0.0.apk)
+- 残タスク (すべて QA = 実機確認待ち):
+  - Phase 20: QS 長押し動作
+  - Phase 21: APK ファイル名
+  - Phase 18: Quick Settings タイル
+  - Phase 16: UI トップにアイコン表示
+  - Phase 17: ON/OFF ラベル改善
+  - Phase 8: 権限管理
+  - Phase 9: CI/CD (CI green 確認済み、CD v28.0.0 リリース成功)
+  - Phase 11: 権限 UI
+  - Phase 14: Shizuku UI
+  - Phase 15: アプリ情報
+- ブロッカー: なし
 - ビルド: 成功確認済み
 
 ## 完了済み
@@ -86,3 +87,4 @@
 - 初回リリース v27.0.0 完了: 署名 keystore (PKCS12) 生成、GitHub Secrets 設定、タグ/version.txt 整合性チェック追加
 - QS タイル長押し: MainActivity に QS_TILE_PREFERENCES intent-filter 追加
 - APK ファイル名: app-release.apk → dimore-v{n}.0.0.apk に変更
+- v28.0.0 リリース完了: CD ワークフロー成功、dimore-v28.0.0.apk を GitHub Release にアップロード
