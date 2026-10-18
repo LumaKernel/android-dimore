@@ -194,8 +194,8 @@
 - [x] [ロジック] OverlayService に ACTION_SHOW_INACTIVE 追加: オフ状態通知を表示するだけのアクション (フォアグラウンドサービス起動不要、通知表示+stopSelf)
 - [x] [ロジック] BootReceiver 修正: ACTION_START → ACTION_SHOW_INACTIVE に変更
 - [x] [UI] SettingsActivity ラベル修正: 「端末起動時に自動でオンにする」→「端末起動時にサービスを自動起動」、警告ヒント文言も修正 (通知がすぐ消えるため自動起動の意味がない)
-- [ ] [メタ] docs/design-settings.md 更新: 説明文修正
-- [ ] [メタ] README 更新: 設定テーブルの説明修正
+- [x] [メタ] docs/design-settings.md 更新: 説明文修正
+- [x] [メタ] README 更新: 設定テーブルの説明修正
 - [ ] [QA] 端末起動時に通知だけ表示されオーバーレイは OFF のままであること
 
 ## フェーズ 23: メイン画面・設定画面の UI 改善

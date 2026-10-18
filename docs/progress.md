@@ -96,3 +96,4 @@
 - v29.0.0 リリース完了: Phase 22 (端末起動時自動有効化) を含むリリース
 - Phase 22a: OverlayService に ACTION_SHOW_INACTIVE 追加、BootReceiver を通知表示のみに修正
 - Phase 22a: SettingsActivity ラベル・警告ヒント文言修正
+- Phase 22a: design-settings.md + README 更新 (サービス自動起動、通知表示のみ)

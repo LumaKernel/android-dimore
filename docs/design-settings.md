@@ -10,7 +10,7 @@
 
 | キー | 型 | デフォルト | 説明 |
 |---|---|---|---|
-| `auto_enable_on_boot` | Boolean | false | 端末起動時 (BOOT_COMPLETED) にオーバーレイを自動でオンにする |
+| `auto_enable_on_boot` | Boolean | false | 端末起動時 (BOOT_COMPLETED) にサービスを自動起動しオフ状態通知を表示する (オーバーレイは ON にしない) |
 | `off_notification_mode` | String | "always" | オフ時の通知挙動。値: "always", "dismiss_0s", "dismiss_10s" |
 
 ## 画面構成
@@ -28,7 +28,7 @@
 
 - Compose Navigation は過剰。SettingsActivity を別 Activity として作成
 - 設定項目:
-  1. 端末起動時自動有効化: Switch (オフ時通知が「常に表示」以外の場合、警告ヒント表示)
+  1. 端末起動時サービス自動起動: Switch (オフ時通知が「常に表示」以外の場合、警告ヒント表示)
   2. オフ時通知: ラジオグループ
      - 常に表示
      - 即時非表示 (0秒)
