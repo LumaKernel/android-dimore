@@ -191,8 +191,8 @@
 ### Phase 22a: Boot 自動起動の仕様修正 (通知表示のみ、オーバーレイ ON にしない)
 
 - [ ] [設計] spec.md 更新済み (オーバーレイ ON → サービス起動+オフ通知表示のみ)
-- [ ] [ロジック] OverlayService に ACTION_SHOW_INACTIVE 追加: オフ状態通知を表示するだけのアクション (フォアグラウンドサービス起動不要、通知表示+stopSelf)
-- [ ] [ロジック] BootReceiver 修正: ACTION_START → ACTION_SHOW_INACTIVE に変更
+- [x] [ロジック] OverlayService に ACTION_SHOW_INACTIVE 追加: オフ状態通知を表示するだけのアクション (フォアグラウンドサービス起動不要、通知表示+stopSelf)
+- [x] [ロジック] BootReceiver 修正: ACTION_START → ACTION_SHOW_INACTIVE に変更
 - [ ] [UI] SettingsActivity ラベル修正: 「端末起動時に自動でオンにする」→「端末起動時にサービスを自動起動」、警告ヒント文言も修正 (通知がすぐ消えるため自動起動の意味がない)
 - [ ] [メタ] docs/design-settings.md 更新: 説明文修正
 - [ ] [メタ] README 更新: 設定テーブルの説明修正

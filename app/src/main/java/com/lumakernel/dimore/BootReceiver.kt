@@ -19,8 +19,8 @@ class BootReceiver : BroadcastReceiver() {
 
         val serviceIntent =
             Intent(context, OverlayService::class.java).apply {
-                action = OverlayService.ACTION_START
+                action = OverlayService.ACTION_SHOW_INACTIVE
             }
-        context.startForegroundService(serviceIntent)
+        context.startService(serviceIntent)
     }
 }

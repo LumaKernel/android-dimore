@@ -22,6 +22,7 @@ class OverlayService : Service() {
         const val ACTION_SET_BRIGHTNESS = "com.lumakernel.dimore.ACTION_SET_BRIGHTNESS"
         const val ACTION_BRIGHTNESS_UP = "com.lumakernel.dimore.ACTION_BRIGHTNESS_UP"
         const val ACTION_BRIGHTNESS_DOWN = "com.lumakernel.dimore.ACTION_BRIGHTNESS_DOWN"
+        const val ACTION_SHOW_INACTIVE = "com.lumakernel.dimore.ACTION_SHOW_INACTIVE"
         const val EXTRA_BRIGHTNESS = "brightness"
 
         private const val NOTIFICATION_ID = 1
@@ -85,6 +86,9 @@ class OverlayService : Service() {
             ACTION_BRIGHTNESS_DOWN -> {
                 setBrightness(currentBrightness - BRIGHTNESS_STEP)
                 updateNotification()
+            }
+            ACTION_SHOW_INACTIVE -> {
+                showInactiveNotification()
             }
         }
         return START_NOT_STICKY
