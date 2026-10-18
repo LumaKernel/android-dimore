@@ -119,7 +119,7 @@ private fun SettingsScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "端末起動時に自動でオンにする",
+                text = "端末起動時にサービスを自動起動",
                 modifier = Modifier.weight(1f),
             )
             Switch(
@@ -130,7 +130,7 @@ private fun SettingsScreen(
 
         if (autoEnableOnBoot && offNotificationMode != "always") {
             Text(
-                text = "オフ時の通知が非表示設定のため、オーバーレイ起動後に通知から操作できない場合があります",
+                text = "オフ時の通知が非表示設定のため、自動起動しても通知が表示されません",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(start = 4.dp, bottom = 8.dp),
