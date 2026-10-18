@@ -181,8 +181,8 @@
 
 依存: なし
 
-- [ ] [ロジック] BootReceiver 追加: BOOT_COMPLETED を受信して OverlayService を起動する BroadcastReceiver を実装。SharedPreferences から auto_enable_on_boot (Boolean) を読み、true かつオーバーレイ権限ありなら起動
-- [ ] [ロジック] AndroidManifest.xml: RECEIVE_BOOT_COMPLETED 権限追加 + BootReceiver の receiver 宣言 (exported=true, BOOT_COMPLETED intent-filter)
+- [x] [ロジック] BootReceiver 追加: BOOT_COMPLETED を受信して OverlayService を起動する BroadcastReceiver を実装。SharedPreferences から auto_enable_on_boot (Boolean) を読み、true かつオーバーレイ権限ありなら起動
+- [x] [ロジック] AndroidManifest.xml: RECEIVE_BOOT_COMPLETED 権限追加 + BootReceiver の receiver 宣言 (exported=true, BOOT_COMPLETED intent-filter)
 - [ ] [ロジック] MainActivity の autoEnableIfConfigured() を削除: アプリ起動時の自動有効化ロジックを除去
 - [ ] [UI] SettingsActivity: ラベル変更 (「起動時に自動でオンにする」→「端末起動時に自動でオンにする」)、SharedPreferences キー変更 (auto_enable_on_launch → auto_enable_on_boot)、オフ時通知が「常に表示」以外の場合に警告ヒント表示
 - [ ] [メタ] docs/design-settings.md 更新: auto_enable_on_launch → auto_enable_on_boot、説明文変更

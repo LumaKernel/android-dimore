@@ -88,3 +88,4 @@
 - QS タイル長押し: MainActivity に QS_TILE_PREFERENCES intent-filter 追加
 - APK ファイル名: app-release.apk → dimore-v{n}.0.0.apk に変更
 - v28.0.0 リリース完了: CD ワークフロー成功、dimore-v28.0.0.apk を GitHub Release にアップロード
+- Phase 22 開始: BootReceiver 追加 (BOOT_COMPLETED で自動起動) + AndroidManifest 更新
